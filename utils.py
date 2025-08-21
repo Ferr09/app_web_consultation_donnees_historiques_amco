@@ -123,3 +123,8 @@ def get_serializer(app=None):
     if app is None:
         app = current_app
     return URLSafeTimedSerializer(app.config['SECRET_KEY'])
+
+
+def load_guides_data():
+    with open('data/guides.json', 'r', encoding='utf-8') as f:
+        return json.load(f)

@@ -5,14 +5,15 @@ import os
 from flask import Blueprint, jsonify, render_template, request, flash, redirect, url_for, current_app, abort
 from flask_login import login_required, current_user
 # Dans auth.py
-from main_routes import load_guides_data, secure_filename
+from main_routes import secure_filename
 from utils import (
     find_user_by_email, 
     update_user, 
     get_all_users, 
     delete_user,
     get_protected_admins,
-    generate_recovery_code
+    generate_recovery_code,
+    load_guides_data
 )
 
 # On crée le Blueprint pour les routes d'administration

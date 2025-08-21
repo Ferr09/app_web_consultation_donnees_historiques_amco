@@ -15,7 +15,8 @@ from utils import (
     get_all_users, 
     delete_user,
     get_protected_admins,
-    generate_recovery_code
+    generate_recovery_code,
+    load_guides_data
 )
 
 
@@ -153,9 +154,6 @@ def generer_et_envoyer_fichier(df_filtre: pd.DataFrame, format_demande: str) -> 
         tampon = io.BytesIO(tampon_texte.getvalue().encode('utf-8-sig'))
         return send_file(tampon, mimetype='text/csv; charset=utf-8', as_attachment=True, download_name=f"export_{horodatage}.csv")
 
-def load_guides_data():
-    with open('data/guides.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
 
 # =======================================================
 # Routes Principales de l'Application
