@@ -450,36 +450,3 @@ def internal_server_error(e):
         return render_template('errors/500_authed.html'), 500
     else:
         return render_template('errors/500_public.html'), 500
-
-
-
-# =======================================================
-# === RUTA DE DEPURACIÓN TEMPORAL ===
-# =======================================================
-@main.route('/debug-routes')
-def list_routes():
-    """
-    Une route de débogage pour lister toutes les routes connues par l'application.
-    Ceci nous aidera à voir ce que Vercel enregistre réellement.
-    """
-    import urllib
-    output = []
-    for rule in current_app.url_map.iter_rules():
-        options = {}
-        for arg in rule.arguments:
-            options[arg] = "[{0}]".format(arg)
-        
-        methods = ','.join(rule.methods)
-        url = urllib.parse.unquote(url_for(rule.endpoint, **options))
-        line = "{:50s} {:20s} {}".format(rule.endpoint, methods, url)
-        output.append(line)
-    
-    # On imprime aussi dans les logs de Vercel pour une meilleure visibilité
-    print("--- ROUTES ENREGISTRÉES ---")
-    for line in sorted(output):
-        print(line)
-    print("--------------------------")
-        
-    # On retourne le résultat dans le navigateur
-    return "<pre>" + "\n".join(sorted(output)) + "</pre>"
-# =======================================================
