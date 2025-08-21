@@ -11,7 +11,6 @@ from itsdangerous import URLSafeTimedSerializer
 # On crée les instances ici, SANS les lier à une application.
 # Elles seront liées à l'application dans la fabrique (create_app).
 login_manager = LoginManager()
-mail = Mail()
 oauth = OAuth()
 # On ne peut pas initialiser le serializer ici car il a besoin de la SECRET_KEY.
 # On le laissera dans la fabrique d'application.
