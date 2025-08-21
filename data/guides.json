@@ -1,0 +1,74 @@
+{
+    "guide-utilisateur": {
+        "title": "Guide utilisateur",
+        "description": "Comment utiliser l'application pour réaliser mes requêtes.",
+        "icon": "fa-book",
+        "default_sub_item": "comment-faire-une-requete",
+        "sub_items": {
+            "comment-faire-une-requete": {
+                "title": "Comment faire une requête ?", 
+                "pdf": "guide-requete-simple.pdf"
+            },
+            "comment-faire-une-requete-avancee": {
+                "title": "Comment faire une requête avancée ?", 
+                "pdf": "guide-requete-avancee.pdf"
+            },
+            "comment-exporter-les-donnees": {
+                "title": "Comment exporter les données ?", 
+                "pdf": "guide-export-donnees.pdf"
+            }
+        }
+    },
+    "rgpd": {
+        "title": "RGPD",
+        "description": "Priorisez la bonne utilisation des vos données ainsi que les données internes.",
+        "icon": "fa-shield-alt",
+        "default_sub_item": "bonne-utilisation-donnees",
+        "sub_items": {
+            "bonne-utilisation-donnees": {
+                "title": "Bonne utilisation des données exportées", 
+                "pdf": "rgpd-utilisation-donnees.pdf"
+            }
+        }
+    },
+    "support-technique": {
+        "title": "Support Technique",
+        "description": "Dépannage et options de contact.",
+        "icon": "fa-headset",
+        "default_sub_item": "probleme-acces",
+        "sub_items": {
+            "probleme-acces": {
+                "title": "À qui s'adresser pour un problème d'accès ?", 
+                "pdf": "support-probleme-acces.pdf"
+            },
+            "probleme-requete-avancee": {
+                "title": "J'ai un problème avec les requêtes avancées", 
+                "pdf": "support-probleme-requete.pdf"
+            },
+            "probleme-visualisation-donnees": {
+                "title": "Je ne visualise pas les données réelles", 
+                "pdf": "support-probleme-visualisation.pdf"
+            }
+        }
+    },
+    "administration": {
+        "title": "Administration",
+        "description": "Comment utiliser les outils d'administrateur.",
+        "icon": "fa-cog",
+        "default_sub_item": "gerer-comptes",
+        "sub_items": {
+            "gerer-comptes": {
+                "title": "Comment gérer les comptes qui ont accès ?", 
+                "pdf": "admin-gestion-comptes.pdf"
+            },
+            "gerer-requetes-avancees": {
+                "title": "Comment gérer les requêtes avancées ?", 
+                "pdf": "admin-gestion-requetes.pdf"
+            },
+            "mettre-a-jour-documentation": {
+                "title": "Comment mettre à jour la documentation ?", 
+                "pdf": "admin-maj-documentation.pdf"
+            }
+        }
+    }
+}

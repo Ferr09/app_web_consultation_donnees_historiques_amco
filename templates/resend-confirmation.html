@@ -1,0 +1,27 @@
+<!-- templates/resend_confirmation.html -->
+{% extends "layout_auth.html" %}
+
+{% block title %}Renvoyer la confirmation{% endblock %}
+
+{% block form_content %}
+    <div class="form-container">
+        <h2>Renvoyer l'e-mail de confirmation</h2>
+        <p class="form-subtitle">
+            Si vous n'avez pas reçu l'e-mail ou si le lien a expiré, 
+            veuillez entrer votre adresse e-mail ci-dessous pour en recevoir un nouveau.
+        </p>
+        
+        <!-- Ce formulaire envoie l'e-mail à la nouvelle route que nous allons créer -->
+        <form method="POST" action="{{ url_for('auth.resend_confirmation') }}">
+            <div class="form-group">
+                <label for="email">Votre adresse e-mail</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Renvoyer</button>
+        </form>
+
+        <div class="auth-links">
+            <a href="{{ url_for('auth.login') }}">Retour à la connexion</a>
+        </div>
+    </div>
+{% endblock %}

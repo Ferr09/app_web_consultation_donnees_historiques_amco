@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}AMCO – Interface{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="fond">
+        <div class="superposition">
+            <div class="container">
+                <!-- Barre latérale -->
+                <nav class="sidebar">
+                    <ul class="nav-items">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/logo-groupe-amco.png') }}" alt="Logo"
+                                width="90">
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.filtre_requete') }}" title="Requête simple">
+                                <i class="fas fa-search"></i>
+                                <span>Requête simple</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.filtre_requete_avancee') }}" title="Requête avancée">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Requête avancée</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.documentation') }}" title="Documentation">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Documentation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.profil') }}" title="Mon Profil">
+                                <i class="fas fa-user"></i>
+                                <span>Mon Profil</span>
+                            </a>
+                        </li>
+
+                        {# **Seulement pour les admins** #}
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
+                        <li>
+                            <a href="{{ url_for('admin.panel_admin') }}" title="Administration">
+                                <i class="fas fa-cog"></i>
+                                <span>Administration</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+                    <div class="logout">
+                        <a href="{{ url_for('auth.logout') }}" title="Sortir">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sortir</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Contenu principal -->
+                <main class="content">
+                    <header>
+                        <h1>{% block header %}Administration{% endblock %}</h1>
+                    </header>
+
+                    {% block content %}
+                    <!-- ============================================= -->
+                    <!-- === DÉBUT DU CONTENU DU PANNEAU D'ADMIN   === -->
+                    <!-- ============================================= -->
+                    <div class="conteneur-options-admin">
+                        <!-- Carte 1: Gérer les comptes -->
+                        <a href="{{ url_for('admin.gestion_comptes') }}" class="carte-admin">
+                            <div class="icone-carte">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <!-- NOUVEAU conteneur pour le texte -->
+                            <div class="contenu-texte-carte">
+                                <h2>Gérer l'accès</h2>
+                                <p>Ajouter, modifier ou supprimer des utilisateurs.</p>
+                            </div>
+                        </a>
+
+                        <!-- Carte 2: Mettre à jour la documentation -->
+                        <a href="{{ url_for('admin.mettre_a_jour_doc') }}" class="carte-admin">
+                            <div class="icone-carte icone-superposee">
+                                <i class="fas fa-file-alt icone-base"></i>
+                                <i class="fas fa-sync-alt icone-overlay"></i>
+                            </div>
+                            <!-- NOUVEAU conteneur pour le texte -->
+                            <div class="contenu-texte-carte">
+                                <h2>Mettre à jour la documentation</h2>
+                                <p>Actualiser les guides et manuels d'utilisation.</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endblock %}
+
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

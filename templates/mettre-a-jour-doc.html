@@ -1,0 +1,119 @@
+{% extends 'template-page.html' %}
+
+
+{% set hide_header = True %}
+
+{% block title %}AMCO - Gérer la Documentation{% endblock %}
+
+{% block body_class %}page-admin-doc{% endblock %}
+
+{% block content %}
+<div id="conteneur-notifications" class="conteneur-notifications">
+
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="notification notification-{{ category }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+
+</div>
+<div class="admin-doc-container">
+    <div class="results-header">
+        <button class="btn-back" onclick="window.history.back()" aria-label="Retour">
+            <img src="../static/images/left-arrow.png" alt="Retour" width="30" height="30">
+        </button>
+        <h1>{% block header %}Gérer la documentation{% endblock %}</h1>
+    </div>
+    <p class="subtitle">Mettez à jour les fichiers PDF associés à chaque section de la documentation.</p>
+
+    <form id="admin-doc-form" action="{{ url_for('admin.update_documentation_pdf') }}" method="POST"
+        enctype="multipart/form-data" class="admin-form-card">
+        <h2>Mettre à jour un document existant</h2>
+
+        <div class="form-row">
+            <!-- Sélecteur de Catégorie -->
+            <div class="form-group">
+                <label for="category-select">1. Sélectionnez une catégorie</label>
+                <!-- Le conteneur pour le style personnalisé -->
+
+                <select id="category-select" name="category" required>
+                    <option value="" disabled selected>-- Choisir une catégorie --</option>
+                    {% for slug, guide in guides_data.items() %}
+                    {% if slug != 'administration' or current_user.is_admin() %}
+                    <option value="{{ slug }}">{{ guide.title }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+
+            </div>
+
+            <!-- Sélecteur de Sous-item -->
+            <div class="form-group">
+                <label for="subitem-select">2. Sélectionnez un document</label>
+                <!-- Le conteneur pour le style personnalisé -->
+                <div class="custom-select-wrapper">
+                    <select id="subitem-select" name="sub_item" required disabled>
+                        <option value="" disabled selected>-- D'abord choisir une catégorie --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone de téléversement de fichier (LA PARTIE QUI MANQUAIT) -->
+        <div class="form-group">
+            <label for="pdf-file-input">3. Téléversez le nouveau fichier PDF</label>
+            <div class="file-drop-area">
+                <img src="{{ url_for('static', filename='images/pdf.png') }}" alt="Icone PDF" class="file-drop-icon" />
+                <span class="file-drop-message">Glissez-déposez votre fichier ici, ou <span
+                        class="file-browse-link">parcourez</span></span>
+                <span class="file-drop-support">Supporte: pdf, Taille max: 90MB</span>
+                <input type="file" id="pdf-file-input" name="pdf_file" class="file-input" accept=".pdf" required>
+            </div>
+            <!-- Barre de progression -->
+            <div id="upload-progress-wrapper" class="progress-wrapper" style="display: none;">
+                <div class="progress-info">
+                    <span class="progress-filename"></span>
+                    <span id="upload-progress-percent" class="progress-percent">0%</span>
+                </div>
+                <progress id="upload-progress-bar" class="progress-bar" value="0" max="100"></progress>
+            </div>
+        </div>
+
+
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Mettre à jour le document</button>
+        </div>
+    </form>
+
+</div>
+{% block scripts %}
+
+    {# 1. On crée un "pont" de données entre le backend (Python/Flask) et le frontend (JavaScript) #}
+    <script>
+        // Cette variable globale contiendra les messages que Python a envoyés avec flash().
+        // Elle sera accessible par le fichier main.js.
+        window.flashedMessages = [];
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    // On ajoute chaque message (avec sa catégorie) à la liste.
+                    // Le filtre '| e' est une mesure de sécurité pour échapper les caractères spéciaux.
+                    window.flashedMessages.push({ category: '{{ category }}', message: '{{ message | e }}' });
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+
+    <script>
+        const guidesDataForJS = {{ guides_data | tojson | safe }};
+    </script>
+    
+{% endblock %}
+{% endblock %}

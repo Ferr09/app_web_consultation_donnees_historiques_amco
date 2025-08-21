@@ -1,0 +1,122 @@
+[
+  {
+    "code article": "P1001",
+    "Désignation": "Palier à billes 6205-2RS",
+    "Qté fact": 50,
+    "Prix Unitaire": 7.45,
+    "Tot HT": 372.50,
+    "Code client": "C001",
+    "Raison sociale": "MecaTech Industries",
+    "Date BL": "2025-01-15T00:00:00",
+    "N° BL": "BL-DEMO-001",
+    "N° Cde": 101
+  },
+  {
+    "code article": "P1002",
+    "Désignation": "Chaîne à rouleaux 08B-1 1m",
+    "Qté fact": 25,
+    "Prix Unitaire": 12.30,
+    "Tot HT": 307.50,
+    "Code client": "C002",
+    "Raison sociale": "Fluid-Process Solutions",
+    "Date BL": "2025-01-15T00:00:00",
+    "N° BL": "BL-DEMO-002",
+    "N° Cde": 102
+  },
+  {
+    "code article": "P1003",
+    "Désignation": "Joint torique NBR Ø30×3",
+    "Qté fact": 100,
+    "Prix Unitaire": 0.85,
+    "Tot HT": 85.00,
+    "Code client": "C001",
+    "Raison sociale": "MecaTech Industries",
+    "Date BL": "2025-01-16T00:00:00",
+    "N° BL": "BL-DEMO-003",
+    "N° Cde": 103
+  },
+  {
+    "code article": "P1004",
+    "Désignation": "Soupape de sûreté 1” PN16",
+    "Qté fact": 5,
+    "Prix Unitaire": 98.75,
+    "Tot HT": 493.75,
+    "Code client": "C003",
+    "Raison sociale": "Bati-Concept Ingénierie",
+    "Date BL": "2025-01-16T00:00:00",
+    "N° BL": "BL-DEMO-004",
+    "N° Cde": 104
+  },
+  {
+    "code article": "P1005",
+    "Désignation": "Pompe centrifuge CF65/50",
+    "Qté fact": 3,
+    "Prix Unitaire": 450.00,
+    "Tot HT": 1350.00,
+    "Code client": "C004",
+    "Raison sociale": "Usinex Production",
+    "Date BL": "2025-01-17T00:00:00",
+    "N° BL": "BL-DEMO-005",
+    "N° Cde": 105
+  },
+  {
+    "code article": "P1006",
+    "Désignation": "Moteur électrique 3~ 1,5 kW",
+    "Qté fact": 4,
+    "Prix Unitaire": 220.00,
+    "Tot HT": 880.00,
+    "Code client": "C005",
+    "Raison sociale": "Services de Maintenance Globale",
+    "Date BL": "2025-01-17T00:00:00",
+    "N° BL": "BL-DEMO-006",
+    "N° Cde": 106
+  },
+  {
+    "code article": "P1007",
+    "Désignation": "Capteur de température PT100",
+    "Qté fact": 30,
+    "Prix Unitaire": 15.20,
+    "Tot HT": 456.00,
+    "Code client": "C002",
+    "Raison sociale": "Fluid-Process Solutions",
+    "Date BL": "2025-01-18T00:00:00",
+    "N° BL": "BL-DEMO-007",
+    "N° Cde": 107
+  },
+  {
+    "code article": "P1008",
+    "Désignation": "Roulement conique 30206",
+    "Qté fact": 12,
+    "Prix Unitaire": 25.75,
+    "Tot HT": 309.00,
+    "Code client": "C006",
+    "Raison sociale": "Agro-Equipements SAS",
+    "Date BL": "2025-01-18T00:00:00",
+    "N° BL": "BL-DEMO-008",
+    "N° Cde": 108
+  },
+  {
+    "code article": "P1009",
+    "Désignation": "Accouplement élastique D38×D19",
+    "Qté fact": 10,
+    "Prix Unitaire": 34.90,
+    "Tot HT": 349.00,
+    "Code client": "C003",
+    "Raison sociale": "Bati-Concept Ingénierie",
+    "Date BL": "2025-01-19T00:00:00",
+    "N° BL": "BL-DEMO-009",
+    "N° Cde": 109
+  },
+  {
+    "code article": "P1010",
+    "Désignation": "Courroie crantée 5M-3000",
+    "Qté fact": 8,
+    "Prix Unitaire": 18.60,
+    "Tot HT": 148.80,
+    "Code client": "C001",
+    "Raison sociale": "MecaTech Industries",
+    "Date BL": "2025-01-19T00:00:00",
+    "N° BL": "BL-DEMO-010",
+    "N° Cde": 110
+  }
+]

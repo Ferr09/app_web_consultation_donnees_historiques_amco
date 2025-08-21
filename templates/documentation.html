@@ -1,0 +1,52 @@
+{% extends "template-page.html" %}
+
+{% block body_class %}documentation-page{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block title %}AMCO - Documentation{% endblock %}
+
+<!-- Bannière supérieure avec le titre et la barre de recherche -->
+{% block header %}
+<div class="guide-banner">
+    <div class="banner-content">Documentation
+    </div>
+</div>
+{% endblock %} {# Change le titre de la page #}
+
+{% block content %}
+{# On enlève le padding par défaut de .main-area pour que notre bannière prenne toute la largeur #}
+<style>
+    .main-area {
+        padding: 0;
+        background-color: transparent;
+        /* On laisse notre section gérer le fond */
+        box-shadow: none;
+    }
+</style>
+
+<!-- DÉBUT DE LA SECTION DU GUIDE UTILISATEUR -->
+<div class="user-guide-section">
+    <!-- Conteneur pour les cartes des guides -->
+    <div class="user-guide-section main-layout">
+        <div class="guides-grid">
+            {% for slug, guide in guides_data.items() %}
+            {% if slug != 'administration' or current_user.is_admin() %}
+            <a href="{{ url_for('main.guide_detail', category_slug=slug) }}" class="guide-card">
+                <div class="card-icon"><i class="fas {{ guide.icon }}"></i></div>
+                <h3>{{ guide.title }}</h3>
+                <p>{{ guide.description }}</p>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</div>
+<!-- FIN DE LA SECTION DU GUIDE UTILISATEUR -->
+ 
+{% endblock %}

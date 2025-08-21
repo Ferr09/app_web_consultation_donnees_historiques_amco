@@ -1,0 +1,31 @@
+{% extends "layout_auth.html" %}
+
+{# Le titre de l'onglet du navigateur changera dynamiquement #}
+{% block title %}{{ titre_page }}{% endblock %}
+
+{% block form_content %}
+    {# Le titre principal et le sous-titre changeront dynamiquement #}
+    <h2>{{ titre_formulaire }}</h2>
+    <p class="form-subtitle">{{ sous_titre_formulaire }}</p>
+    
+    {# Le formulaire pointera vers l'URL que nous passerons depuis Python #}
+    <form method="POST" action="{{ action_formulaire }}">
+        <div class="form-group">
+            <label for="email">Votre adresse e-mail</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            {# L'étiquette du champ de code changera dynamiquement #}
+            <label for="code">{{ label_code }}</label>
+            <input type="text" id="code" name="code" placeholder="{{ placeholder_code }}" required>
+        </div>
+        
+        {# Le texte du bouton changera dynamiquement #}
+        <button type="submit" class="btn btn-primary">{{ texte_bouton }}</button>
+    </form>
+    
+    <div class="auth-links" style="margin-top: 20px; text-align: center;">
+        <a href="{{ url_for('auth.login') }}">Retour à la connexion</a>
+    </div>
+{% endblock %}

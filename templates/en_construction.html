@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page en construction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* Corps de la page */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Conteneur principal */
+        .container {
+            padding: 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Emoji central */
+        .emoji {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        /* Titre du message */
+        h1 {
+            font-size: 26px;
+            color: #333;
+        }
+
+        /* Bouton de retour */
+        .btn-retour {
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            display: inline-block;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-retour:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="emoji">🏗️</div>
+        <h1>Cette page est encore en construction</h1>
+        <a href="{{ url_for('main.filtre_requete') }}" class="btn-retour">Retour à l'accueil</a>
+
+</body>
+</html>

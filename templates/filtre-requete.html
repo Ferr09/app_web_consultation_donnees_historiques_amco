@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}AMCO – Requête{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+</head>
+
+<body data-user-id="{{ current_user.id }}">
+    <div class="fond-ext">
+        <div class="superposition">
+
+            <!-- SOLUCIÓN HTML: Añade la clase 'modal-container' -->
+
+            <div id="conteneur-notifications" class="conteneur-notifications"></div>
+
+            <div class="container">
+                <!-- Barre latérale -->
+                <nav class="sidebar">
+                    <ul class="nav-items">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/logo-groupe-amco.png') }}" alt="Logo AMCO"
+                                width="90">
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.filtre_requete') }}" title="Requête simple">
+                                <i class="fas fa-search"></i>
+                                <span>Requête simple</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.filtre_requete_avancee') }}" title="Requête avancée">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Requête avancée</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.documentation') }}" title="Documentation">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Documentation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.profil') }}" title="Mon Profil">
+                                <i class="fas fa-user"></i>
+                                <span>Mon Profil</span>
+                            </a>
+                        </li>
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
+                        <li>
+                            <a href="{{ url_for('admin.panel_admin') }}" title="Administration">
+                                <i class="fas fa-cog"></i>
+                                <span>Administration</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <div class="logout">
+                        <a href="{{ url_for('auth.logout') }}" title="Sortir">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sortir</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Contenu principal -->
+                <main class="content">
+                    <div class="filter-wrapper">
+                        <header>
+                            <h1>{% block header %}Requête{% endblock %}</h1>
+                            <!-- Bouton pour effacer tous les filtres -->
+                            <button id="btn-clear-all" class="btn-clear-all" title="Tout effacer">×</button>
+
+                        </header>
+
+                        <div class="transaction-selector-wrapper">
+                            <div class="toggle-switch">
+
+                                <!-- Option 1: Ventes -->
+                                <input type="radio" id="transaction-ventes" name="type_transaction" value="ventes"
+                                    checked>
+                                <label for="transaction-ventes">Ventes</label>
+
+                                <!-- Option 2: Achats -->
+                                <input type="radio" id="transaction-achats" name="type_transaction" value="achats">
+                                <label for="transaction-achats">Achats</label>
+
+                                <!-- L'élément qui va coulisser -->
+                                <div class="switch-pill"></div>
+
+                            </div>
+                        </div>
+
+                        {% block content %}
+                        <section class="main-area">
+                            <form id="form-advanced" method="POST" action="{{ url_for('main.resultat_requete') }}"
+                                data-simple-search>
+
+                                <!-- 1. Résultats matchent -->
+                                <div class="filter-block match-block">
+                                    <label class="match-label">Les résultats matchent</label>
+                                    <div class="toggle-group">
+                                        <label>
+                                            <input type="radio" name="match_mode" value="at_least_one">
+                                            <span>Au moins une</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="match_mode" value="all" checked>
+                                            <span>Toutes</span>
+                                        </label>
+                                    </div>
+                                    <label class="match-label">condition/les conditions</label>
+                                </div>
+
+
+                                <!-- Le conteneur .filter-block résout le conflit de centrage imposé par .main-area -->
+
+
+                                <div class="filter-block">
+                                    <div class="period-layout">
+
+                                        <!-- Colonne de gauche (Label) -->
+                                        <div class="period-layout__label">
+                                            <label>Sélectionnez la période :</label>
+                                        </div>
+
+                                        <!-- Colonne de droite (Contrôles) -->
+                                        <div class="period-layout__controls">
+                                            <span class="clear-btn" title="Effacer la période">×</span>
+                                            <div class="period-layout__input-stack">
+                                                <!-- Période de début -->
+                                                <div class="date-group">
+                                                    <input type="number" id="start_year" name="start_year"
+                                                        placeholder="Année" class="year-input">
+                                                    <input type="number" id="start_month_visible" placeholder="Mois"
+                                                        class="month-input">
+                                                    <input type="hidden" id="start_month" name="start_month">
+                                                </div>
+
+                                                <span class="arrow-separator">→</span>
+
+                                                <!-- Période de fin -->
+                                                <div class="date-group">
+                                                    <input type="number" id="end_year" name="end_year"
+                                                        placeholder="Année" class="year-input">
+                                                    <input type="number" id="end_month_visible" placeholder="Mois"
+                                                        class="month-input">
+                                                    <input type="hidden" id="end_month" name="end_month">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- 3. Champs dynamiques -->
+                                <div class="filter-block">
+                                    <label>Sélectionnez les champs :</label>
+
+                                    <div id="fields-container">
+                                        <div class="field-row">
+                                            <span class="clear-btn" title="Retirer">×</span>
+                                            <select name="field[]" class="champ-filtre-dynamique">
+                                                <option value="">--Champ--</option>
+                                            </select>
+                                            <select name="operator[]">
+                                                <option value="contains" selected>contient</option>
+                                                <option value="equals">égal à</option>
+                                                <option value="startswith">commence par</option>
+                                            </select>
+                                            <input type="text" name="value[]" placeholder="Valeur à filtrer">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </section>
+
+                        <div class="filter-actions">
+                            <button form="form-advanced" type="submit" class="btn-rechercher-full">Rechercher</button>
+                        </div>
+                        {% endblock %}
+                    </div>
+                </main>
+            </div>
+
+            <!-- Script unifié -->
+            <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

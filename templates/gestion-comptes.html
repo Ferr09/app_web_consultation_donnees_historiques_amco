@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}AMCO – Interface{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="conteneur-notifications" class="conteneur-notifications"></div>
+    <div class="fond">
+        <div class="superposition">
+            <div class="container">
+                <!-- Barre latérale -->
+                <nav class="sidebar">
+                    <ul class="nav-items">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/logo-groupe-amco.png') }}" alt="Logo"
+                                width="90">
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.filtre_requete') }}" title="Requête simple">
+                                <i class="fas fa-search"></i>
+                                <span>Requête simple</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.filtre_requete_avancee') }}" title="Requête avancée">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Requête avancée</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.documentation') }}" title="Documentation">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Documentation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('main.profil') }}" title="Mon Profil">
+                                <i class="fas fa-user"></i>
+                                <span>Mon Profil</span>
+                            </a>
+                        </li>
+
+                        {# **Seulement pour les admins** #}
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
+                        <li>
+                            <a href="{{ url_for('admin.panel_admin') }}" title="Administration">
+                                <i class="fas fa-cog"></i>
+                                <span>Administration</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+                    <div class="logout">
+                        <a href="{{ url_for('auth.logout') }}" title="Sortir">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sortir</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Contenu principal -->
+                <main class="content">
+
+
+
+                    <!-- ============================================= -->
+                    <!-- === DÉBUT DU CONTENU DU PANNEAU D'ADMIN   === -->
+                    <!-- ============================================= -->
+
+
+                    {% block content %}
+                    <div class="gestion-comptes-conteneur">
+
+                        <div class="results-header">
+                            <button class="btn-back" onclick="window.history.back()" aria-label="Retour">
+                                <img src="../static/images/left-arrow.png" alt="Retour" width="30" height="30">
+                            </button>
+
+
+                            <h1>{% block header %}Gérer l'accès{% endblock %}</h1>
+                        </div>
+
+                        <!-- Carte 1: ajouter un mail -->
+                        <div class="carte">
+                            <div class="carte-corps">
+                                <form id="form-ajouter-compte" class="form-ajouter-compte">
+                                    <div class="input-group">
+                                        <i class="fas fa-envelope icon"></i>
+                                        <input type="email" name="email" placeholder="E-mail du nouvel utilisateur"
+                                            required>
+                                    </div>
+
+                                    <div class="role-selector">
+                                        <input type="radio" id="role-user" name="role" value="utilisateur" checked>
+                                        <label for="role-user">Utilisateur</label>
+                                        <input type="radio" id="role-admin" name="role" value="admin">
+                                        <label for="role-admin">Admin</label>
+                                    </div>
+
+                                    <button type="submit" class="btn-ajouter">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Ajouter</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- Enveloppe pour la table (pour la réactivité) -->
+                        <div class="table-wrapper">
+                            <table id="table-comptes" class="table-utilisateurs">
+                                <thead>
+                                    <tr>
+                                        <th>Adresse e-mail</th>
+                                        <th>État du compte</th>
+                                        <th>Code de Secours</th>
+                                        <th>Rôle</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="corps-table-comptes">
+                                    <!-- Las filas se insertarán aquí con JavaScript -->
+                                    <tr>
+                                        <td colspan="4" style="text-align:center; padding: 20px;">Chargement des
+                                            comptes...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ====================================================== -->
+                    <!-- ==== MODAL DE CONFIRMATION    ==== -->
+                    <!-- ====================================================== -->
+                    {% endblock %}
+
+                </main>
+            </div>
+            <!-- ====================================================== -->
+            <!-- ==== MODAL UNIQUE ET CORRECT (HORS DU MAIN)       ==== -->
+            <!-- ====================================================== -->
+            <div id="modal-confirmation" class="modal-overlay">
+                <div class="modal-contenu">
+                    <button id="btn-modal-annuler" class="modal-close-btn">x</button>
+                    <p id="modal-message">Êtes-vous sûr ?</p>
+                    <div id="modal-code-conteneur" class="modal-code-conteneur" style="display: none;">
+                        <span id="modal-code-affichage">CODE-A-AFFICHER</span>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="btn-modal-regenerer" class="btn btn-warning" style="display: none;">
+                            <i class="fas fa-sync-alt"></i> Régénérer
+                        </button>
+                        <button id="btn-modal-confirmer" class="btn btn-danger">Confirmer</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Au début de gestion-comptes.html, ou dans ton layout si tu préfères -->
+            <script>
+                // On rend la liste des admins protégés accessible au JavaScript
+                window.PROTECTED_ADMINS = {{ protected_admins | tojson }};
+            </script>
+            <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

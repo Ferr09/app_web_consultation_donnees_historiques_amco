@@ -1,0 +1,27 @@
+# Fichier des variables d'environnement
+.env
+
+# Fichiers de cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environnement virtuel (si vous en utilisez un nommé 'venv')
+venv/
+.venv/
+
+# Fichiers de dépendances générés
+*.egg-info/
+
+# Données des utilisateurs de l'application
+data/users.json
+
+# Fichiers de base de données SQLite
+*.db
+*.sqlite
+*.sqlite3
+database.db
+
+# Fichiers de configuration de l'application
+.DS_Store

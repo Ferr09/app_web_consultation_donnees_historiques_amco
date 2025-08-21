@@ -1,0 +1,4369 @@
+/* ***************************************
+   Réinitialisation générale des styles
+**************************************** */
+html,
+body {
+    height: 100%;
+    /* Hauteur de la fenêtre complète */
+    margin: 0;
+    /* Supprime les marges par défaut */
+    font-family: 'Segoe UI', sans-serif;
+    /* Police principale de l’application */
+
+}
+
+
+.fond {
+    background-image: url("../images/photo-amco-interieur.jpg");
+    height: 100vh;
+
+    background-size: cover;
+    /* remplit l'écran */
+    background-repeat: no-repeat;
+    /* pas de répétition */
+    background-position: center;
+    /* centrage de l'image */
+    background-attachment: fixed;
+    /* image fixe même lors du scroll */
+
+    position: fixed;
+    /* Reste fixé lors du scroll */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Derrière tout */
+}
+
+.fond-ext {
+    background-image: url("../images/photo-amco-exterieur.jpg");
+
+    height: 100vh;
+
+    background-size: cover;
+    /* remplit l'écran */
+    background-repeat: no-repeat;
+    /* pas de répétition */
+    background-position: center;
+    /* centrage de l'image */
+    background-attachment: fixed;
+    /* image fixe même lors du scroll */
+
+    position: fixed;
+    /* Reste fixé lors du scroll */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Derrière tout */
+}
+
+.superposition {
+    background-color: rgba(53, 53, 53, 0.33);
+    /* couleur à 40% de transparence */
+    position: relative;
+    /* Juste au-dessus du fond si tu veux appliquer un flou ou une teinte */
+    backdrop-filter: blur(0px);
+    /* Tu peux mettre un flou ici si tu veux */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    min-height: 100vh;
+
+}
+
+/* ***************************************
+   Structure générale : sidebar + contenu
+**************************************** */
+.container {
+    display: flex;
+    /* Affichage en flexbox pour aligner sidebar et contenu */
+    min-height: 100%;
+    /* Hauteur de la fenêtre complète */
+}
+
+/* ***************************************
+   Menu latéral — liste des items
+**************************************** */
+.nav-items {
+    list-style-type: none;
+    /* Supprime les puces */
+    padding: 0;
+    /* Supprime le padding */
+    margin: 0;
+    /* Supprime la marge */
+    width: 100%;
+    /* Prend toute la largeur disponible */
+}
+
+.nav-items li {
+    width: 100%;
+    /* Chaque item prend toute la largeur */
+    text-align: center;
+    /* Centre le contenu horizontalement */
+    margin: 20px 0;
+    /* Espace vertical entre les items */
+}
+
+/* ***************************************
+   Barre latérale (sidebar)
+**************************************** */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 90px;
+    /* largeur minimale */
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    transition: width 0.2s ease;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.sidebar:hover {
+    background-color: rgba(0, 0, 0, 0.92);
+    width: 240px;
+}
+
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar li {
+    margin: 12px 0;
+}
+
+.sidebar li img {
+    margin-bottom: 25px;
+}
+
+/* Effet de zoom sur l'image au survol de la sidebar */
+.sidebar:hover li img {
+    width: 150px;
+    height: auto;
+    margin-bottom: -12px;
+}
+
+/* Style des liens (<a>) dans la barre latérale */
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* FIXE : Toujours aligné à gauche pour éviter les sauts */
+
+    /* Padding gauche initial pour centrer l'icône (de 30px) dans la barre (de 90px) */
+    padding: 30px 10px 30px 30px;
+
+    /* Transition douce pour la couleur de fond et le padding (qui crée l'effet de glissement) */
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
+
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+
+/* Style de l'icône à l'intérieur du lien */
+.sidebar a i {
+    font-size: 32px;
+    width: 30px;
+    min-width: 30px;
+    text-align: center;
+    transition: font-size 0.3s ease;
+}
+
+/* Le texte à côté de l'icône (état réduit/fermé) */
+.sidebar a span {
+    font-size: 18px;
+    color: white;
+    margin-left: 0;
+    opacity: 0;
+    width: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: opacity 0.2s ease, width 0.2s ease;
+    /* On ajoute 'width' à la transition */
+}
+
+/* Le texte à côté de l'icône (état étendu/ouvert) */
+.sidebar:hover a span {
+    opacity: 1;
+    margin-left: 12px;
+    width: auto;
+    /* La largeur s'ajuste au contenu */
+    visibility: visible;
+}
+
+/* Style des liens au survol de la barre latérale */
+.sidebar:hover a {
+    /* Le padding s'ajuste pour laisser de la place au texte qui va apparaître */
+    padding-left: 33px;
+}
+
+.sidebar a:hover {
+    background-color: #3a3a3a;
+
+}
+
+
+/* ***************************************
+   Zone déconnexion au bas de la sidebar
+**************************************** */
+.sidebar .logout {
+    margin-top: auto;
+    /* Pousse vers le bas */
+    margin-bottom: 20px;
+    /* Espace sous le bouton */
+    width: 100%;
+    /* Pleine largeur */
+    border-top: 1px solid #555;
+    /* Séparateur horizontal */
+    padding-top: 15px;
+    /* Padding interne haut */
+}
+
+.logout {
+    width: 100%;
+    /* Pleine largeur */
+    text-align: center;
+    /* Centre le lien */
+    padding-top: 10px;
+    /* Padding interne haut */
+    border-top: 1px solid #555;
+    /* Séparateur horizontal */
+}
+
+/* ***************************************
+   Contenu principal (à droite de la sidebar)
+**************************************** */
+
+/* static/css/style.css */
+
+/* ***************************************
+   Contenu Principal
+**************************************** */
+
+.content {
+    position: relative;
+
+    margin-left: 100px;
+    /* Décalage pour la sidebar */
+    margin-top: 50px;
+    /* Décalage pour l’en-tête */
+    flex-grow: 1;
+    /* Prend l’espace restant */
+    padding: 10px;
+    /* display: flex pour centrer le contenu */
+    display: flex;
+    /* Espace interne généreux */
+    flex-direction: column;
+    /* Colonne pour header + main-area */
+    align-items: stretch;
+    /* Centre horizontal */
+
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+
+/* ***************************************
+   En-tête de chaque page
+**************************************** */
+header {
+    display: flex;
+    /* Flexbox pour centrer */
+    justify-content: center;
+    /* Centre horizontal */
+    align-items: center;
+    /* Centre vertical si hauteur */
+    text-align: center;
+    /* Centre le texte à l’intérieur */
+    padding: 40px 0;
+    /* Espace interne haut/bas */
+    margin-bottom: 0px;
+    /* Padding vertical */
+    gap: 1rem;
+}
+
+/* On s'assure que le titre ne prend pas toute la place */
+header h1 {
+    margin: 0;
+    flex-shrink: 0;
+    /* Empêche le titre de se réduire */
+}
+
+/* Styles pour le bloc de filtre spécifique à l'en-tête */
+.header-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* Espace entre "Afficher les" et les boutons */
+
+    /* On annule les styles par défaut de .filter-block qui ne sont pas nécessaires ici */
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #000000;
+}
+
+.content header h1 {
+    font-size: 40px;
+    /* Taille du titre principal */
+    margin: 0 0 30px 0;
+    /* Marge sous le titre */
+    text-align: center;
+    /* Centre le texte */
+    color: #d6e0ff;
+
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ***************************************
+   "Carte blanche" contenant le contenu
+**************************************** */
+/* 1) Transformez .main-area en conteneur flex centré */
+.main-area {
+    display: block;
+    /* active Flexbox */
+    flex-direction: column;
+    /* empile les blocs verticalement */
+    align-items: center;
+    /* centre horizontalement tous les enfants */
+    /* vos styles existants : */
+    background-color: #ffffff00;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* 2) Pour que chaque « filter-block » prenne 100% de la largeur max que vous avez fixée */
+.main-area .filter-block {
+    width: 100%;
+    max-width: 700px;
+    /* ou la largeur que vous voulez à l’intérieur du card */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* ***************************************
+   Boutons génériques de navigation
+**************************************** */
+.btn-nav {
+    display: inline-block;
+    /* Bloc en ligne */
+    background-color: #007bff;
+    /* Couleur primaire */
+    color: white;
+    /* Texte blanc */
+    text-align: center;
+    /* Centre texte */
+    padding: 10px 25px;
+    /* Padding interne */
+    text-decoration: none;
+    /* Pas de soulignement */
+    border-radius: 8px;
+    /* Bords arrondis */
+    font-size: 16px;
+    /* Taille du texte */
+    font-weight: 500;
+    /* Poids moyen */
+    margin-top: 10px;
+    /* Marge haute */
+    transition: background-color 0.3s ease;
+    /* Transition douce */
+    height: auto;
+    /* Hauteur auto */
+    width: auto;
+    /* Largeur auto */
+}
+
+.btn-nav:hover {
+    background-color: #0056b3;
+    /* Couleur plus foncée au survol */
+    text-decoration: none;
+    /* Toujours pas de soulignement */
+}
+
+/* ***************************************
+   Conteneur vertical pour formes simples
+**************************************** */
+.v-container {
+    display: flex;
+    /* Flexbox */
+    flex-direction: column;
+    /* Colonne */
+    align-items: center;
+    /* Centre horizontal */
+    gap: 5px;
+    /* Espace entre éléments */
+}
+
+/* ***************************************
+   Blocs de filtres (avancés)
+**************************************** */
+.filter-block {
+    margin-bottom: 20px;
+    /* Espace sous chaque bloc */
+}
+
+.filter-block label {
+    font-weight: bold;
+    /* Texte en gras */
+    display: block;
+    /* Bloc séparé */
+    margin-bottom: 8px;
+    /* Espace sous le label */
+}
+
+.filter-block h4 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    color: #555;
+    font-weight: 600;
+}
+
+.toggle-group label {
+    margin-right: 20px;
+    /* Espace droite */
+    font-weight: normal;
+    /* Texte normal */
+}
+
+
+
+.period-group>div {
+    display: flex;
+    /* Flexbox interne */
+    gap: 5px;
+    /* Espace entre select */
+}
+
+.period-block .sep {
+    font-weight: bold;
+}
+
+.period-block .clear-btn {
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #888;
+}
+
+/* Lignes dynamiques de champs */
+#fields-container .field-row {
+    display: flex;
+    /* Flexbox */
+    align-items: center;
+    /* Centre vertical */
+    gap: 10px;
+    /* Espace entre éléments */
+    margin-bottom: 10px;
+    /* Marge basse */
+}
+
+#fields-container .field-row .clear-btn {
+    cursor: pointer;
+    /* Curseur pointeur */
+    font-size: 1.2em;
+    /* Taille du symbole */
+    color: #454545;
+    /* Couleur grisée */
+}
+
+#fields-container select,
+#fields-container input {
+    padding: 6px;
+    /* Padding interne */
+    border: 1px solid #ccc;
+    /* Bordure grise */
+    border-radius: 4px;
+
+    /* Bords arrondis */
+    span {
+        color: #4b4747;
+        /* Couleur du texte */
+    }
+
+    background-color: rgba(235, 235, 228, 0.49);
+}
+
+/* ***************************************
+   Actions de formulaire (bouton Rechercher)
+**************************************** */
+.form-actions {
+    text-align: right;
+    /* Aligne le contenu à droite */
+    margin-top: 30px;
+    /* Marge haute */
+}
+
+/* ***************************************
+   Conteneur commun pour largeur fixe
+**************************************** */
+
+/* 1) Conteneur commun pour largeur fixe et centrage */
+.filter-wrapper {
+    max-width: 800px;
+    /* même max-width que votre carte blanche */
+    margin: 0 auto 40px;
+    /* centré + marge basse pour l’espace sous le bouton */
+    /* padding: 0 16px; */
+    /* même padding latéral si besoin */
+    box-sizing: border-box;
+    /* inclut le padding dans la largeur totale */
+}
+
+/* 2) Votre carte blanche existante
+.filter-wrapper .main-area {
+    background-color: rgba(233, 238, 242, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+} */
+
+.filter-wrapper .main-area {
+    background: rgba(233, 238, 242, 0.55);
+    /* couleur claire semi-transparente */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* support Safari */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+}
+
+/* 3) Conteneur du bouton */
+.filter-wrapper .filter-actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    /* espace entre carte et bouton */
+}
+
+.filter-wrapper .btn-rechercher-full {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #2e5ce5;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    /* SIN bordura */
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    /* Sombras:
+     - primera: sombra normal (ninguna)
+     - segunda: anillo de foco invisible */
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0),
+        /* sombra difusa = 0 */
+        0 0 0 2px rgba(0, 0, 0, 0);
+    /* anillo = transparente */
+    transition: background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.filter-wrapper .btn-rechercher-full:hover,
+.filter-wrapper .btn-rechercher-full:focus {
+    background-color: #254bb5;
+    /* Solo cambiamos el color del anillo, nunca su grosor */
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 2px #1f1f1f;
+}
+
+
+
+/* 5) Responsive */
+@media (max-width: 480px) {
+    .filter-wrapper {
+        max-width: 100%;
+        padding: 0 16px;
+    }
+}
+
+/* Conteneur en ligne pour les boutons */
+.toggle-group {
+    display: flex;
+    /* place les éléments sur une même ligne */
+    gap: 0px;
+    /* espace horizontal entre chaque bouton */
+    align-items: center;
+    /* centre verticalement les boutons */
+}
+
+
+/* 2) Style de base pour chaque bouton */
+.toggle-group .toggle-btn {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-right: 0px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 3) Style du bouton actif (radio checked) */
+.toggle-group input[type="radio"]:checked+.toggle-btn {
+    background-color: #2e5ce5;
+    color: #fff;
+    border-color: #254bb5;
+}
+
+/* Supprime la bordure du dernier bouton */
+.toggle-group label:last-child span {
+    border-right: none;
+}
+
+/* Style au survol de la souris */
+.toggle-group label:hover span {
+    background-color: #e9ecef20;
+}
+
+/* 1) Contenedor de los labels en fila */
+.toggle-group {
+    display: flex;
+    gap: 12px;
+    /* espacio entre cada opción */
+    /* centra verticalmente si tuvieran distinta altura */
+}
+
+/* 2) Cada label se comporta como inline-flex para input + texto */
+.toggle-group label {
+    display: inline-flex;
+    align-items: center;
+    /* input y texto centrados */
+    gap: 4px;
+    /* pequeño espacio entre radio y texto */
+    cursor: pointer;
+    /* mano al pasar por encima */
+}
+
+/* 3) Ocultas la apariencia nativa y estilizas */
+.toggle-group input[type="radio"] {
+    /* opcional: si quieres un radio personalizado, aquí */
+    display: none;
+    margin: 0;
+    /* quita márgenes por defecto */
+}
+
+/* (si quieres un estilo de botón en el label activo, añade esto) */
+.toggle-group input[type="radio"]:checked+span {
+    font-weight: bold;
+    color: #2e5ce5;
+}
+
+/* 1) La ligne entière est un flex container */
+.match-block {
+    display: flex;
+    align-items: center;
+    /* aligne verticalement label et toggle-group */
+    gap: 12px;
+    /* espace entre le texte et le groupe de boutons */
+}
+
+/* 2) On retire le margin-bottom par défaut de .filter-block */
+.match-block {
+    margin-bottom: 0;
+    /* vous pouvez ajuster l’espacement global */
+}
+
+/* 3) Le label « Les résultats matchent : » */
+.match-label {
+    white-space: nowrap;
+    /* empêche le retour à la ligne du texte */
+    font-weight: bold;
+}
+
+/* 4) Groupe de boutons inline */
+.toggle-group {
+    display: flex;
+    gap: 8px;
+    /* espace entre chaque option */
+}
+
+/* 5) Chaque label-radio aligne input + texte côte à côte */
+.toggle-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    /* espace entre radio et texte */
+    cursor: pointer;
+}
+
+/* style.css */
+
+/* Groupe période */
+
+.period-block label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+
+/* “×” pour effacer */
+.period-group .clear-btn {
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #888;
+}
+
+/* Séparateur “à” */
+.period-group .sep {
+    font-weight: bold;
+}
+
+/* Styles partagés pour Flatpickr et le natif */
+.period-group input[type="number"],
+.period-group .monthpicker {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100px;
+}
+
+.period-group input[type="month"] {
+    padding: 6px 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Masquer le fallback natif par défaut */
+.period-group input[type="month"] {
+    display: none;
+}
+
+.period-type {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.year-picker,
+.period-picker {
+    display: none;
+    /* masqués par défaut */
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.period-block .year-picker select,
+.period-block .period-picker input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.period-block label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Modal overlay masquée par défaut */
+#modal-champ-c.modal-hidden,
+#modal-champ-v.modal-hidden,
+#modal-periode.modal-hidden {
+    display: none;
+}
+
+/* Quand on montre le modal */
+#modal-champ-c.modal-active,
+#modal-champ-v.modal-active,
+#modal-periode.modal-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Contenu du modal */
+#modal-champ-c .modal-content,
+#modal-champ-v .modal-content,
+#modal-periode .modal-content {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Message */
+#modal-champ-c .modal-content p,
+#modal-champ-v .modal-content p,
+#modal-periode .modal-content p {
+    margin-bottom: 20px;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* Bouton Fermer */
+#modal-champ-c .modal-content button,
+#modal-champ-v .modal-content button,
+#modal-periode .modal-content button {
+    padding: 8px 16px;
+    background: #2e5ce5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#modal-champ-c .modal-content button:hover,
+#modal-champ-v .modal-content button:hover,
+#modal-periode .modal-content button:hover {
+    background: #254bb5;
+}
+
+.modal-content p strong {
+    font-weight: bold;
+}
+
+/* ===== Structure générale ===== */
+.results-header {
+    display: block;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-back {
+    font-size: 1.5em;
+    margin-right: 16px;
+    cursor: pointer;
+    color: #2e5ce5;
+    background: none;
+    border: none;
+}
+
+.results-header h1 {
+    justify-items: center;
+    font-size: 2.5rem;
+    margin: 0;
+    flex-grow: 1;
+    color: #d6e0ff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+
+/* ===== Zone de téléchargement ===== */
+.download-bar {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.download-main {
+    flex: 8;
+    background: #2e3a5c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Styles pour le  de téléchargement */
+/* =============================================
+   Toggle CSV / XLSX, même style que “Au moins une / Toutes”
+   ============================================= */
+/* ===== Toggle CSV / XLSX sin espacios ===== */
+.download-options.toggle-group {
+    display: inline-flex;
+    gap: 0 !important;
+    /* fuerza cero espacio entre labels */
+}
+
+.download-options.toggle-group label {
+    margin: 0 !important;
+    /* elimina márgenes heredados */
+    padding: 0;
+}
+
+.download-options.toggle-group input[type="radio"]+span {
+    display: block;
+    padding: 10px 15px;
+    border: 2px solid #ccc;
+    color: #333;
+    background: #ccc;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Eliminar bordes dobles: solo uno entre them */
+.download-options.toggle-group label:first-child span {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.download-options.toggle-group label:last-child span {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+}
+
+/* Estado activo */
+.download-options.toggle-group input[type="radio"]:checked+span {
+    background-color: #2e5ce5;
+    color: #fff;
+    border-color: #2e5ce5;
+    font-weight: bold;
+}
+
+
+
+.download-options button {
+    flex: 1;
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.download-options button.active {
+    background: #2e3a5c;
+}
+
+/* ===== Tableau responsif ===== */
+.table-wrapper {
+    overflow-x: auto;
+
+}
+
+#results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+
+#results-table th,
+#results-table td {
+    border: 1px solid #0000004a;
+    padding: 8px 12px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+#results-table th {
+    background: #1f2540;
+    color: #fff;
+}
+
+#results-table tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+#results-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+
+/* ===== Pagination ===== */
+.pagination {
+    position: sticky;
+    bottom: 60px;
+    /* toujours collée en bas du wrapper */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #e9eef2;
+    /* pour recouvrir la table */
+    padding: 8px 0;
+    margin-top: 0;
+    /* on n’ajoute plus de margin ici */
+    border-top: 1px solid #e9ecef;
+    z-index: 10;
+    /* pour qu’elle reste au-dessus des lignes */
+}
+
+.pagination button {
+    border: none;
+    background: #2e3a5c;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.pagination .page-indicator {
+    font-weight: bold;
+    color: #333;
+}
+
+/* 1) El contenedor debe ser relativo */
+.filter-wrapper {
+    position: relative;
+
+}
+
+.btn-clear-all {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 30%;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 18px;
+    line-height: 0px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.btn-clear-all:hover {
+    background-color: #c0392b;
+}
+
+.filter-wrapper .results-header .btn-clear-all {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 30%;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 18px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.filter-wrapper .results-header .btn-clear-all:hover {
+    background-color: #c0392b;
+}
+
+.demo-banner {
+    background-color: #ffeeba;
+    color: #856404;
+    padding: 12px 15px;
+    text-align: center;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    position: fixed;
+    /* Ou 'sticky' si vous préférez qu'elle bouge avec le défilement */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    /* Un z-index élevé pour qu'elle soit au-dessus de tout le reste */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Optionnel : ajoute une marge supérieure au contenu principal quand la bannière est présente */
+body.has-demo-banner .container {
+    padding-top: 50px;
+    /* Ajustez cette valeur à la hauteur de votre bannière */
+}
+
+/* Vous pouvez aussi ajouter une classe pour les alignements à droite dans vos tables */
+.text-right {
+    text-align: right;
+}
+
+/* --- Conteneur pour le sélecteur, le centre horizontalement --- */
+.transaction-selector-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+/* --- Style de base pour l'interrupteur --- */
+.toggle-switch {
+    position: relative;
+    display: flex;
+    /* Utilise Flexbox pour aligner les labels */
+    background-color: #e9ecef;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Cache les vrais boutons radio */
+.toggle-switch input[type="radio"] {
+    display: none;
+}
+
+/* Style pour les labels qui agissent comme des boutons */
+.toggle-switch label {
+    display: block;
+    padding: 8px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #495057;
+    /* Couleur du texte inactif */
+    cursor: pointer;
+    user-select: none;
+    z-index: 2;
+    /* Important: le texte doit être au-dessus de la pastille */
+    transition: color 0.3s ease-in-out;
+}
+
+/* --- La "pastille" coulissante (maintenant un div) --- */
+.switch-pill {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background-color: #0d6efd;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    /* Est derrière le texte */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* --- LA LOGIQUE QUI FONCTIONNE MAINTENANT --- */
+
+/* 1. Quand un input est coché, changer la couleur de son label associé */
+.toggle-switch input[type="radio"]:checked+label {
+    color: white;
+    /* Texte blanc pour l'option active */
+}
+
+/* 2. Quand l'input "achats" est coché, bouger la pastille */
+.toggle-switch input[id="transaction-achats"]:checked~.switch-pill {
+    transform: translateX(100%);
+}
+
+/* 1. Style pour la "carte" et son "ombre" */
+.carte {
+    /* background-color: white; */
+    /* Fond blanc pour la carte */
+    border: 1px solid #e0e0e0;
+    /* Bordure grise subtile */
+    border-radius: 0.5rem;
+    /* Coins légèrement arrondis */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    /* Ombre portée légère pour donner de la profondeur */
+    margin-bottom: 1.5rem;
+
+    /* Espace en dessous de la carte pour la séparer du reste */
+    input {
+        background-color: rgba(241, 244, 247, 0.935);
+    }
+}
+
+/* 2. Style pour l' "espacement intérieur" */
+.carte-corps {
+    padding: 0.5rem;
+    /* Ajoute un espacement tout autour à l'intérieur de la carte */
+    background-color: rgba(250, 250, 250, 0.1);
+    padding-bottom: 20px;
+}
+
+
+
+/* (Optionnel mais recommandé) Styles de base pour que la table soit lisible et propre */
+.table-donnees {
+    width: 100%;
+    /* La table essaie de prendre toute la largeur disponible dans son conteneur */
+    border-collapse: collapse;
+    /* Fusionne les bordures des cellules pour un look net */
+    font-size: 0.9rem;
+    /* Taille de police légèrement réduite pour une meilleure lisibilité */
+    color: #333;
+    /* Couleur du texte pour un contraste agréable */
+    min-width: 1200px;
+    /* Largeur minimale pour éviter que la table ne devienne trop étroite */
+    table-layout: auto;
+}
+
+/* --- 1. Style pour les en-têtes du tableau (THEAD) --- */
+.table-donnees thead tr {
+    /* 
+    !! COULEUR À PERSONNALISER !! 
+    Remplacez #007bff par le code hexadécimal de la couleur de votre bouton.
+    Quelques exemples : 
+    - Bleu Bootstrap : #007bff
+    - Vert succès : #28a745
+    - Rouge danger : #dc3741
+    - Gris foncé : #343a40 
+    */
+    background-color: #2e3a5c;
+
+    color: #ffffff;
+    /* Couleur du texte en blanc pour contraster avec le fond */
+    text-align: left;
+    font-weight: bold;
+    /* Texte en gras */
+}
+
+.table-donnees th,
+.table-donnees td {
+    padding: 0.75rem;
+    /* Espacement à l'intérieur des cellules */
+    text-align: left;
+    /* Alignement du texte à gauche */
+    border-bottom: 1px solid #dee2e6;
+    /* Ligne de séparation entre les rangées */
+}
+
+.table-donnees th {
+    padding: 12px 15px;
+    /* Espacement intérieur (vertical et horizontal) */
+    text-transform: uppercase;
+    /* Met le texte des en-têtes en majuscules pour un style plus pro */
+    letter-spacing: 0.5px;
+    /* Petit espacement entre les lettres */
+}
+
+/* --- 2. Style pour les lignes de données (TBODY) --- */
+.table-donnees tbody tr {
+    background-color: rgba(255, 255, 255, 0.85);
+    /* couleur blanche semi-opaque */
+    backdrop-filter: blur(0px);
+    /* pas de flou sur les lignes */
+}
+
+.table-donnees td {
+    padding: 12px 15px;
+    /* Espacement cohérent avec les en-têtes */
+    white-space: nowrap;
+    color: #1f1f1f;
+    /* couleur foncée pour une meilleure lisibilité */
+}
+
+
+.table-donnees tbody tr:nth-of-type(even) {
+    background-color: rgba(240, 240, 240, 0.9);
+    /* <-- COULEUR DE FOND INTERCALÉE */
+}
+
+/* (Optionnel) Ajoute un effet de survol sur les lignes pour une meilleure lisibilité */
+.table-donnees tbody tr:hover {
+    background-color: #e9ecef;
+    /* Une couleur légèrement plus foncée que la couleur zébrée */
+    cursor: pointer;
+    /* Indique que la ligne peut être cliquable (même si elle ne l'est pas) */
+}
+
+/* 3. Style pour le "défilement horizontal" */
+.conteneur-defilement {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.main-area .carte {
+    /* On a enlevé le ">" */
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* ============================================= */
+/* ==== STYLES POUR LE DROPDOWN PERSONNALISÉ ==== */
+/* ============================================= */
+
+/* --- Conteneur principal du select personnalisé --- */
+.custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    flex-grow: 1;
+    /* Pour qu'il prenne de la place dans la rangée */
+    margin: 0 5px;
+}
+
+/* --- Le select original caché --- */
+/* Il reste fonctionnel pour la soumission du formulaire mais n'est pas visible. */
+.custom-select-wrapper .original-select {
+    display: none;
+}
+
+/* --- Le bouton visible sur lequel l'utilisateur clique --- */
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    height: 38px;
+    /* Hauteur cohérente avec l'input */
+    box-sizing: border-box;
+}
+
+.custom-select-trigger:hover {
+    border-color: #888;
+}
+
+/* Style lorsque le menu est ouvert */
+.custom-select-wrapper.open .custom-select-trigger {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: #3498db;
+    /* Une couleur de focus */
+}
+
+.custom-select-trigger span {
+    flex-grow: 1;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Style pour le texte de substitution (placeholder) */
+.custom-select-trigger.placeholder span {
+    color: #888;
+}
+
+.custom-select-trigger .arrow {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+    color: #888;
+}
+
+.custom-select-wrapper.open .arrow {
+    transform: rotate(180deg);
+}
+
+/* --- La liste des options --- */
+.custom-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.custom-select-wrapper.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- Options individuelles --- */
+.custom-option {
+    padding: 10px 12px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+    font-size: 14px;
+    color: #333;
+    position: relative;
+}
+
+.custom-option:hover {
+    background-color: rgba(255, 255, 255, 0.384);
+}
+
+.custom-option.selected {
+    background-color: #2e5ce5;
+    color: white;
+    font-weight: 500;
+}
+
+/* --- Petite barre latérale pour l'option sélectionnée --- */
+.custom-option.selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 3px;
+    background-color: white;
+    border-radius: 0 3px 3px 0;
+}
+
+
+.date-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.394);
+}
+
+
+.date-group:focus-within {
+    border-color: #3498db;
+}
+
+.year-input,
+.month-input {
+    border: none;
+    padding: 8px 10px;
+    height: 38px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: transparent;
+    color: #333;
+}
+
+.year-input:focus,
+.month-input:focus {
+    outline: none;
+}
+
+.year-input {
+    width: 80px;
+}
+
+.month-input {
+    width: 70px;
+    border-left: 1px solid #ccc;
+    cursor: pointer;
+    /* Indique qu'on peut cliquer dessus */
+}
+
+/* --- Pour Chrome, Safari, Edge, Opera --- */
+/* On cible les pseudo-éléments spécifiques que ces navigateurs utilisent pour les flèches. */
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button,
+.month-input::-webkit-outer-spin-button,
+.month-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    /* Cache les éléments */
+    margin: 0;
+    /* Nécessaire pour certains navigateurs pour supprimer tout espace résiduel */
+}
+
+/* --- Pour Firefox --- */
+/* Firefox utilise une propriété différente pour obtenir le même résultat. */
+.year-input[type='number'],
+.month-input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+.arrow-separator {
+    font-size: 1.2em;
+    color: #888;
+}
+
+/* Styles pour le SÉLECTEUR DE MOIS personnalisé */
+.custom-month-picker {
+    position: absolute;
+    z-index: 100;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    padding: 10px;
+    width: 280px;
+    display: none;
+    background-color: rgba(241, 244, 247, 0.777);
+    /* Initialement caché */
+}
+
+.month-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.month-picker-header .nav-arrow {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.month-picker-header .nav-arrow:hover {
+    background-color: #f4f4f9;
+}
+
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.month-cell {
+    text-align: center;
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 14px;
+}
+
+.month-cell:hover {
+    background-color: #f4f4f9;
+}
+
+.month-cell.selected {
+    background-color: #3498db;
+    color: white;
+    font-weight: 500;
+}
+
+
+.period-label-group .clear-btn {
+    /* Style pour le bouton 'x' si nécessaire */
+    margin-left: 8px;
+    cursor: pointer;
+    color: #888;
+}
+
+
+
+.period-input-area .arrow-separator {
+    align-self: right;
+    /* Centre la flèche horizontalement */
+    color: #888;
+}
+
+
+
+.period-header label {
+    font-weight: 600;
+    font-size: 16px;
+    /* Un peu plus grand pour correspondre à l'image */
+}
+
+
+
+.period-content .clear-btn {
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    padding-top: 5px;
+    /* Petit ajustement pour aligner parfaitement avec le centre de l'input */
+}
+
+.period-content .clear-btn:hover {
+    color: #333;
+}
+
+/* ======================================================================== */
+/* ==== CODE CSS DÉFINITIF POUR LE BLOC DE PÉRIODE (À COLLER À LA FIN) ==== */
+/* ======================================================================== */
+
+/* 
+   En plaçant ce bloc à la fin du fichier CSS, ces règles auront la priorité 
+   sur les anciennes règles conflictuelles, corrigeant ainsi le layout 
+   sans avoir besoin de supprimer manuellement l'ancien code.
+*/
+
+/* --- Conteneur principal --- */
+.period-block {
+    margin: 0;
+}
+
+/* En-tête avec le label */
+.period-block .period-header {
+    margin-bottom: 8px;
+}
+
+
+.period-block .period-header label {
+    font-weight: 600;
+    font-size: 16px;
+    display: inline;
+    /* Annule tout 'display:block' conflictuel */
+}
+
+/* Le conteneur qui aligne le 'x' et les inputs */
+.period-block .period-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Le bouton 'x' */
+.period-block .period-content .clear-btn {
+    font-size: 24px;
+    font-weight: 300;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    padding-top: 5px;
+}
+
+.period-block .period-content .clear-btn:hover {
+    color: #333;
+}
+
+/* La zone avec les deux lignes d'inputs */
+.period-block .period-input-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* La flèche '→' */
+.period-block .period-input-area .arrow-separator {
+    align-self: center;
+    color: #888;
+}
+
+/* Le groupe Année + Mois */
+.period-block .date-group {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.period-block .date-group:focus-within {
+    border-color: #3498db;
+}
+
+/* Les inputs eux-mêmes */
+.period-block .year-input,
+.period-block .month-input {
+    border: none;
+    padding: 8px 10px;
+    height: 38px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: transparent;
+
+}
+
+.period-block .year-input:focus,
+.period-block .month-input:focus {
+    outline: none;
+}
+
+
+
+.period-header label,
+.period-block label {
+    /* Cible les deux pour une meilleure compatibilité */
+    font-weight: 600;
+    font-size: 16px;
+    display: inline;
+    /* TRÈS IMPORTANT: Empêche le label de forcer un retour à la ligne */
+    margin: 0;
+}
+
+/* --- Contenu avec 'x' et inputs --- */
+.period-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.period-content .clear-btn {
+    font-size: 24px;
+    font-weight: 300;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    padding-top: 5px;
+    flex-shrink: 0;
+}
+
+.period-content .clear-btn:hover {
+    color: #333;
+}
+
+/* --- Zone des inputs (début et fin) --- */
+.period-input-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.period-input-area .arrow-separator {
+    align-self: center;
+    color: #888;
+}
+
+/* --- Groupe Année + Mois --- */
+.date-group {
+    display: flex;
+    border: 1px solid #808080be;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.date-group:focus-within {
+    border-color: #2067b8a9;
+}
+
+/* --- Inputs Année et Mois --- */
+.year-input,
+.month-input {
+    border: none;
+    padding: 8px 10px;
+    height: 38px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: transparent;
+}
+
+.year-input:focus,
+.month-input:focus {
+    outline: none;
+}
+
+.year-input {
+    width: 80px;
+}
+
+.month-input {
+    width: 70px;
+    border-left: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.year-input::placeholder,
+.month-input::placeholder {
+    color: #2b2828;
+    /* Couleur des placeholders */
+    opacity: 0.9;
+    /* Légèrement transparent pour un effet subtil */
+}
+
+
+/* --- Cacher les flèches des inputs numériques --- */
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button,
+.month-input::-webkit-outer-spin-button,
+.month-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.year-input[type='number'],
+.month-input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+/* --- Réinitialisation des anciennes règles conflictuelles --- */
+/* Ceci assure que les anciennes structures ne cassent pas la nouvelle */
+.period-label-group,
+.period-group {
+    display: initial;
+    /* Réinitialise le display flex de ces anciennes classes */
+    /* ... autres réinitialisations si nécessaire ... */
+}
+
+/* =================================================================== */
+/* ==== CORRECTION DÉFINITIVE DU LAYOUT POUR LE BLOC DE PÉRIODE ==== */
+/* =================================================================== */
+
+/* ÉTAPE 1: Le conteneur principal à 2 colonnes (Label | Contrôles) */
+.filter-block .date-group {
+    background-color: rgb(235 235 228 / 20%);
+
+    span {
+        color: #4b4747;
+    }
+
+    ;
+
+    input {
+        color: #212020;
+    }
+
+    ;
+}
+
+.filter-block .period-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    /* Force l'affichage en ligne */
+    align-items: flex-start !important;
+    gap: 15px !important;
+}
+
+/* ÉTAPE 2: La colonne de droite (le 'x' et la pile d'inputs) */
+.period-layout .period-layout__controls {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Force l'affichage en ligne */
+    align-items: flex-start !important;
+    gap: 10px !important;
+}
+
+/* ÉTAPE 3: La pile d'inputs (votre div.period-input-area) */
+/* Cette règle est correcte et nécessaire pour empiler les dates verticalement */
+.period-layout .period-layout__input-stack {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Maintient l'empilement vertical des dates */
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* Styles additionnels pour un rendu parfait */
+.period-layout .period-layout__label {
+    padding-top: 8px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.period-layout .clear-btn {
+    padding-top: 5px;
+    font-size: 24px;
+    color: #454545;
+    cursor: pointer;
+}
+
+/* =================================================================== */
+/* ==== STYLES POUR LE PANNEAU D'ADMINISTRATION (CARTES)           ==== */
+/* =================================================================== */
+
+/* 
+   Conteneur principal pour les cartes d'options. 
+   Utilise Flexbox pour un alignement flexible et réactif.
+*/
+
+
+.conteneur-options-admin {
+    display: flex;
+    flex-direction: column;
+    /* MODIFIÉ : Les cartes s'empilent verticalement maintenant */
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    /* Optionnel: fixe une largeur max pour le conteneur */
+    margin: 0 auto;
+    /* Centre le conteneur */
+    padding: 40px;
+}
+
+.carte-admin {
+    background: rgba(255, 255, 255, 0.55);
+    /* blanc semi-transparent */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* compatibilité Safari */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Mise en page horizontale */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 25px;
+}
+
+
+.carte-admin:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.carte-admin .icone-carte {
+    font-size: 40px;
+    /* Taille légèrement réduite pour un meilleur équilibre */
+    color: #284aae;
+    margin-bottom: 0;
+    /* SUPPRIMÉ: La marge du bas n'est plus nécessaire */
+    flex-shrink: 0;
+    /* AJOUTÉ: Empêche l'icône de se rétrécir */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    /* Donne une largeur fixe à l'icône pour un alignement parfait */
+}
+
+/* Le nouveau conteneur pour le texte qui permet de le traiter comme un seul bloc */
+.contenu-texte-carte {
+    display: flex;
+    flex-direction: column;
+}
+
+.carte-admin h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+    /* Marge réduite entre titre et paragraphe */
+    color: #343a40;
+    margin-top: 0;
+    /* Réinitialise la marge du haut */
+}
+
+.carte-admin p {
+    font-size: 0.95rem;
+    color: #1e2830;
+    line-height: 1.5;
+    margin-bottom: 0;
+    /* Réinitialise la marge du bas */
+}
+
+/* Styles pour les icônes composites (pas de changement majeur ici) */
+.icone-combo .fa-plus {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    font-size: 18px;
+    color: #28a745;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.icone-superposee .icone-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/* =================================================================== */
+/* ==== STYLES POUR LA PAGE DE GESTION DES COMPTES                 ==== */
+/* =================================================================== */
+
+.gestion-comptes-conteneur {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 25px;
+}
+
+.gestion-comptes-conteneur .results-header:nth-child(1) {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: block;
+    flex-direction: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 25px;
+}
+
+/* Bouton "Ajouter un compte" qui prend toute la largeur */
+.btn-full-width {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-full-width:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+/* Conteneur de la table pour le défilement horizontal sur petits écrans */
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #0000004a;
+    border-radius: 8px;
+}
+
+.table-utilisateurs {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    /* Empêche la table de trop se compresser */
+}
+
+.table-utilisateurs th,
+.table-utilisateurs td {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #0000004a;
+    background-color: #e9ecef;
+}
+
+.table-utilisateurs thead th {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #0000004a;
+    font-weight: 600;
+    color: #495057;
+}
+
+.table-utilisateurs tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Style de l'e-mail */
+.table-utilisateurs td:first-child {
+    font-weight: 500;
+    color: #212529;
+}
+
+/* Style du rôle (Admin/Utilisateur) */
+.role-badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.role-admin {
+    background-color: #ffeeba;
+    color: #856404;
+}
+
+.role-user {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+/* Style du bouton supprimer */
+.btn-supprimer {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+.btn-supprimer:hover {
+    color: #a71d2a;
+}
+
+/* =================================================================== */
+/* === STYLE AMÉLIORÉ POUR L'INTERRUPTEUR (TOGGLE SWITCH)          === */
+/* =================================================================== */
+
+/* Conteneur principal de l'interrupteur */
+.table-utilisateurs .switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+    vertical-align: middle;
+    /* Assure un bon alignement avec le texte */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* On cache l'input natif */
+.table-utilisateurs .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* La barre de fond de l'interrupteur */
+.table-utilisateurs .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 26px;
+    /* Transition pour la couleur de fond */
+    transition: background-color 0.4s ease !important;
+}
+
+/* La bille intérieure de l'interrupteur */
+.table-utilisateurs .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    /* --- LA CORRECTION DÉFINITIVE --- */
+    /* On définit l'état initial de la transformation. */
+    transform: translateX(0);
+
+    /* On applique la transition "stylée" à la propriété 'transform' avec !important */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Changement de couleur quand l'interrupteur est activé */
+.table-utilisateurs input:checked+.slider {
+    background-color: #28a745;
+}
+
+/* Ajoute un "anneau" de focus pour l'accessibilité */
+.table-utilisateurs input:focus+.slider {
+    box-shadow: 0 0 1px #28a745;
+}
+
+/* Changement de position de la bille quand l'interrupteur est activé */
+.table-utilisateurs input:checked+.slider:before {
+    transform: translateX(22px);
+}
+
+/* =================================================================== */
+/* ==== STYLES POUR LES NOTIFICATIONS FLOTTANTES ("TOASTS")        ==== */
+/* =================================================================== */
+
+/* Conteneur principal qui va contenir toutes les notifications */
+.conteneur-notifications {
+    position: relative;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+    /* Au-dessus de tout, même des modals */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 350px;
+    max-width: 90%;
+}
+
+/* Style de base pour chaque notification individuelle */
+.notification {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-left: 5px solid;
+    /* Bordure colorée à gauche */
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        opacity 0.4s ease;
+}
+
+/* Animation d'apparition */
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Animation de disparition */
+.notification.hide {
+    transform: translateX(120%);
+    opacity: 0;
+}
+
+/* Icône de la notification */
+.notification-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+/* Message de la notification */
+.notification-message {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Bouton "X" pour fermer */
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* --- Variantes de couleur --- */
+
+/* 1. Information (Bleu) */
+.notification.info {
+    border-left-color: #3498db;
+}
+
+.notification.info .notification-icon {
+    color: #3498db;
+}
+
+/* 2. Avertissement (Jaune) */
+.notification.warning {
+    border-left-color: #f1c40f;
+}
+
+.notification.warning .notification-icon {
+    color: #f1c40f;
+}
+
+/* 3. Erreur (Rouge) */
+.notification.error {
+    border-left-color: #e74c3c;
+}
+
+.notification.error .notification-icon {
+    color: #e74c3c;
+}
+
+/* 4. Succès (Vert) */
+.notification.success {
+    border-left-color: #2ecc71;
+}
+
+.notification.success .notification-icon {
+    color: #2ecc71;
+}
+
+/* ============================================= */
+/* === NOUVEAU FORMULAIRE D'AJOUT DE COMPTE  === */
+/* ============================================= */
+
+/* Conteneur principal du formulaire d'ajout */
+.form-ajouter-compte {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+/* Groupe pour l'input avec icône */
+.form-ajouter-compte .input-group {
+    position: relative;
+    flex-grow: 1;
+    /* Prend le plus d'espace possible */
+}
+
+.form-ajouter-compte .input-group .icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.form-ajouter-compte input[type="email"] {
+    width: 100%;
+    padding: 10px 12px 10px 38px;
+    /* Espace pour l'icône */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    height: 42px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-ajouter-compte input[type="email"]:focus {
+    outline: none;
+    border-color: #2e5ce5;
+    box-shadow: 0 0 0 2px rgba(46, 92, 229, 0.2);
+}
+
+/* Sélecteur de rôle (style de boutons segmentés) */
+.role-selector {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    /* Empêche le rétrécissement */
+}
+
+.role-selector input[type="radio"] {
+    display: none;
+    /* Cache les radios natifs */
+}
+
+.role-selector label {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+    border-left: 1px solid #ccc;
+    white-space: nowrap;
+}
+
+.role-selector label:first-of-type {
+    border-left: none;
+}
+
+/* Style du bouton sélectionné */
+.role-selector input[type="radio"]:checked+label {
+    background-color: #2e5ce5;
+    color: white;
+    border-color: #254bb5;
+}
+
+/* Bouton "Ajouter" */
+.btn-ajouter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    /* Vert pour l'action d'ajouter */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-ajouter:hover {
+    background-color: #218838;
+}
+
+/* Styles pour les actions dans la table */
+.table-utilisateurs .btn-action-delete {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.table-utilisateurs .btn-action-delete:hover {
+    color: #c0392b;
+}
+
+/* ============================================= */
+/* === STYLES POUR LA FENÊTRE MODALE         === */
+/* ============================================= */
+
+/* L'arrière-plan semi-transparent qui couvre toute la page */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Assure qu'elle est au-dessus de tout */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Style pour la transition d'affichage */
+.modal-overlay.visible {
+    opacity: 1;
+}
+
+/* La boîte de dialogue elle-même */
+.modal-contenu {
+    position: relative;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible .modal-contenu {
+    transform: scale(1);
+}
+
+
+.modal-titre {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.modal-contenu p {
+    margin-bottom: 25px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Conteneur pour les boutons d'action */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* --- Style pour le nouveau bouton de fermeture "X" --- */
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    background: transparent;
+    border: none;
+
+    font-size: 2.2rem;
+    /* Taille de la croix */
+    font-weight: 300;
+    line-height: 1;
+    /* Pour un centrage vertical parfait */
+
+    color: #888;
+    /* Couleur grise par défaut */
+    cursor: pointer;
+
+    padding: 0;
+    margin: 0;
+
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    color: #e74c3c;
+    /* Rouge au survol */
+    transform: rotate(90deg);
+    /* Petite animation de rotation */
+}
+
+/* Style de base pour les boutons de la modale */
+.btn-modal {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-modal:active {
+    transform: scale(0.97);
+}
+
+/* Bouton secondaire (Annuler) */
+.btn-secondaire {
+    background-color: #e9ecef;
+    color: #495057;
+    border: 1px solid #ccc;
+}
+
+.btn-secondaire:hover {
+    background-color: #d8dde2;
+}
+
+/* Bouton de danger (Supprimer) - Couleur rouge */
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* =================================================================== */
+/* === STYLE POUR FIXER LA POSITION DE L'INTERRUPTEUR              === */
+/* =================================================================== */
+
+.cellule-etat {
+
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5px;
+    /* Espace minimum entre le texte et l'interrupteur */
+    color: #000000;
+}
+
+/* ================================================== */
+/* ==   STYLES UNIQUES POUR LA PAGE DE CONNEXION   == */
+/* ================================================== */
+
+/* --- Configuration Générale de la Page --- */
+.login-page-body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f7f6;
+    padding-left: 0 !important;
+}
+
+.auth-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+}
+
+/* --- Panneau de Gauche (Bleu) --- */
+.auth-panel-welcome {
+    flex: 1;
+    background: linear-gradient(135deg, #007bff, #0056b3, #09498d);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.panel-content {
+    max-width: 350px;
+}
+
+.panel-logo {
+    max-width: 500px;
+    /* Ajusté pour une taille de logo plus raisonnable */
+    margin-bottom: 2rem;
+    filter: brightness(0) invert(1);
+}
+
+.panel-content h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.panel-content p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* --- Panneau de Droite (Formulaire) --- */
+.auth-panel-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: rgba(250, 250, 250, 0.95);
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/*
+ * Conteneur du formulaire. C'est la clé de l'alignement.
+ * On le centre et on lui donne une largeur maximale.
+*/
+.form-content {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; n'est plus nécessaire car les enfants auront 100% de largeur */
+}
+
+/* --- Titres du Formulaire --- */
+.form-content h1,
+.form-content .form-subtitle {
+    text-align: center;
+    /* On centre les titres */
+}
+
+.form-content h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Éléments du Formulaire (Labels, Inputs) --- */
+.login-form {
+    width: 100%;
+    /* Le formulaire prend toute la largeur de .form-content */
+}
+
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 600;
+    text-align: left;
+    /* On aligne les labels à gauche */
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* Important pour que le padding n'augmente pas la largeur */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* --- Boutons --- */
+.btn {
+    width: 100%;
+    /* TOUS les boutons auront la même largeur */
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    margin-top: 0rem;
+    /* Espace au-dessus du bouton de connexion */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+    /* Effet "enfoncé" lors du clic */
+    box-shadow: none;
+    /* L'ombre disparaît au clic */
+}
+
+.btn-google {
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+}
+
+.btn-google:hover {
+    background-color: #f8f8f8;
+}
+
+.btn-google img {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+/* Style pour le bouton Microsoft */
+.btn-microsoft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #5e5e5e;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* Espace entre les boutons */
+    transition: background-color 0.3s;
+}
+
+.btn-microsoft:hover {
+    background-color: #f2f2f2;
+}
+
+.btn-microsoft img {
+    width: 20px;
+    height: 20px;
+}
+
+/* --- Autres Éléments --- */
+.separator {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+}
+
+.separator hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+.separator-text {
+    padding: 0 1rem;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.error-banner {
+    width: 100%;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 850px) {
+    .auth-wrapper {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .auth-panel-welcome {
+        display: none;
+        /* On cache le panneau bleu sur mobile pour un formulaire plus direct */
+    }
+
+    .auth-panel-form {
+        flex: 1 1 auto;
+        padding: 30px 20px;
+    }
+}
+
+/* ==================================================== */
+/* == STYLES POUR LES NOTIFICATIONS FLOTTANTES (Toast) == */
+/* ==================================================== */
+
+/*
+ * Conteneur principal qui positionne les notifications
+ * dans le coin supérieur droit de l'écran.
+*/
+#conteneur-notifications {
+    position: fixed;
+    /* Reste fixe même si l'utilisateur fait défiler la page */
+    top: 20px;
+    /* Espace depuis le haut */
+    right: 20px;
+    /* Espace depuis la droite */
+    z-index: 1050;
+    /* S'assure qu'il est au-dessus de la plupart des autres éléments */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Espace vertical entre chaque notification */
+    width: auto;
+}
+
+/*
+ * Style de base commun à toutes les notifications.
+*/
+.notification {
+    min-width: 320px;
+    max-width: 450px;
+    padding: 16px 22px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    border-left: 6px solid;
+    /* Bordure colorée à gauche qui indiquera le type */
+    opacity: 0;
+    transform: translateX(120%);
+    /* Commence complètement en dehors de l'écran */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Animations d'entrée et de sortie */
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.hide {
+    opacity: 0;
+    transform: scale(0.9);
+    /* Effet de rétrécissement à la sortie */
+}
+
+/* Icône à gauche */
+.notification-icon {
+    font-size: 1.8rem;
+    /* Taille de l'icône */
+    margin-right: 18px;
+    flex-shrink: 0;
+    /* Empêche l'icône de se rétrécir */
+}
+
+/* Conteneur du message */
+.notification-message {
+    flex-grow: 1;
+    /* Le message prend tout l'espace restant */
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Bouton de fermeture 'X' */
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    padding: 0 5px;
+    margin-left: 15px;
+    transition: color 0.2s;
+}
+
+.notification-close:hover {
+    color: #333;
+}
+
+/*
+ * === Couleurs et icônes spécifiques pour chaque type ===
+ * C'est ici que la magie opère. On définit la couleur de la bordure
+ * et de l'icône pour chaque classe de type.
+*/
+
+/* --- Type: Succès (Vert) --- */
+.notification.success {
+    border-left-color: #28a745;
+}
+
+.notification.success .notification-icon {
+    color: #28a745;
+}
+
+/* --- Type: Erreur (Rouge) --- */
+.notification.error {
+    border-left-color: #dc3545;
+}
+
+.notification.error .notification-icon {
+    color: #dc3545;
+}
+
+/* --- Type: Avertissement (Jaune/Orange) --- */
+.notification.warning {
+    border-left-color: #ffc107;
+}
+
+.notification.warning .notification-icon {
+    color: #ffc107;
+}
+
+/* --- Type: Info (Bleu) --- */
+.notification.info {
+    border-left-color: #17a2b8;
+}
+
+.notification.info .notification-icon {
+    color: #17a2b8;
+}
+
+/* =================================================================== */
+/* ==== STYLES POUR LA PAGE DE DOCUMENTATION                      ==== */
+/* =================================================================== */
+
+.user-guide-section {
+    --guide-primary-color: #2e5ce5;
+    /* Couleur bleue de tes boutons */
+    --guide-dark-text: #1f1f1f;
+    /* Couleur sombre de ta sidebar */
+    --guide-light-text: #6c757d;
+    /* Un gris standard pour le texte secondaire */
+    /* --guide-page-bg: #e9eef2;       Couleur de fond générale de ton body */
+
+    font-family: 'Segoe UI', sans-serif;
+    /* background-color: var(--guide-page-bg); */
+    box-sizing: border-box;
+}
+
+/* --- Bannière supérieure --- */
+.user-guide-section .guide-banner {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), var(--guide-banner-image);
+    background-size: cover;
+    background-position: right center;
+    padding: 60px 40px;
+    text-align: center;
+    color: var(--guide-dark-text);
+}
+
+.user-guide-section .guide-banner h2 {
+    font-size: 2rem;
+    margin: 0 0 25px;
+    font-weight: 500;
+}
+
+/* --- Barre de recherche --- */
+.user-guide-section .search-form {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 50px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+.user-guide-section #guide-search-input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    padding: 15px 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.user-guide-section .search-form button {
+    border: none;
+    background-color: var(--guide-dark-text);
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    font-size: 1.2rem;
+}
+
+.user-guide-section .search-form button:hover {
+    background-color: var(--guide-primary-color);
+}
+
+/* --- Grille des cartes --- */
+.user-guide-section .guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.user-guide-section .guide-card {
+    background: rgba(255, 255, 255, 0.55);
+    /* fond semi-transparent effet verre */
+    backdrop-filter: blur(12px);
+    /* effet de flou */
+    -webkit-backdrop-filter: blur(12px);
+    /* compatibilité Safari */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* bordure subtile style vitre */
+    border-radius: 12px;
+    /* coins arrondis */
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    /* ombre plus marquée */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.user-guide-section .guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.user-guide-section .card-icon {
+    font-size: 2.5rem;
+    color: var(--guide-primary-color);
+    margin-bottom: 20px;
+}
+
+.user-guide-section .guide-card h3 {
+    font-size: 1.25rem;
+    color: var(--guide-dark-text);
+    margin: 0 0 10px;
+}
+
+.user-guide-section .guide-card p {
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.guide-card {
+    text-decoration: none;
+    /* Enlève le soulignement des liens */
+    color: inherit;
+    /* Fait hériter la couleur du texte */
+}
+
+/* =================================================================== */
+/* ==== STYLES POUR LA PAGE DE DÉTAIL DU GUIDE (AVEC PDF)         ==== */
+/* =================================================================== */
+
+/* Réinitialise la zone principale pour qu'elle soit un conteneur transparent */
+.page-guide-detail .main-area {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    align-items: flex-start;
+    /* Aligne le contenu en haut */
+}
+
+/* Conteneur principal à deux colonnes */
+.guide-detail-container {
+    display: flex;
+    width: 100%;
+    gap: 40px;
+    /* Espace entre le menu et le contenu */
+}
+
+/* --- Menu latéral (Sidebar) --- */
+.guide-sidebar {
+    flex: 0 0 280px;
+    /* Largeur fixe de 280px, ne grandit pas, ne rétrécit pas */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    /* S'adapte à la hauteur de son contenu */
+}
+
+.guide-sidebar .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.guide-sidebar .back-link:hover {
+    color: #2e5ce5;
+}
+
+.guide-sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guide-sidebar nav a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+    margin-bottom: 5px;
+}
+
+.guide-sidebar nav a:hover {
+    background-color: #f4f7f9;
+}
+
+/* Style du lien actif (la page actuelle) */
+.guide-sidebar nav a.active {
+    background-color: #2e5ce5;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* --- Contenu principal (Titre + PDF) --- */
+.guide-content {
+    flex-grow: 1;
+    /* Prend tout l'espace restant */
+}
+
+.guide-content h1 {
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #d6e0ff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    text-align: left;
+}
+
+.pdf-viewer-container {
+    width: 100%;
+    height: 85vh;
+    /* 85% de la hauteur de la fenêtre */
+    border-radius: 12px;
+    overflow: hidden;
+    /* Assure que l'iframe respecte les coins arrondis */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-viewer-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Style pour le titre de la catégorie dans le menu latéral */
+.guide-sidebar .sidebar-category-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    padding: 10px 15px;
+    margin: 15px 0 10px;
+    border-bottom: 1px solid #e9ecef;
+    border-top: 1px solid #e9ecef;
+}
+
+/* =================================================================== */
+/* ==== STYLES POUR LA PAGE D'ADMINISTRATION DE LA DOCUMENTATION ==== */
+/* =================================================================== */
+.page-admin-doc .main-area {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.admin-doc-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.admin-doc-container h1 {
+    font-size: 2.5rem;
+    color: #d6e0ff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.admin-doc-container .subtitle {
+    text-align: center;
+    color: #d6e0ff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.admin-form-card {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+    border: 1px solid #e9ecef;
+}
+
+.admin-form-card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 15px;
+    color: #333;
+}
+
+.form-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+/* static/css/style.css */
+
+/* ====================================================== */
+/* ==== STYLE UNIFIÉ POUR LES FORMULAIRES D'AUTH      ==== */
+/* ====================================================== */
+
+/* Conteneur pour chaque champ (label + input) */
+/* Gère l'espacement vertical entre les champs du formulaire. */
+.form-group {
+    margin-bottom: 20px;
+    /* Espace de 20px sous chaque groupe */
+    width: 100%;
+    text-align: left;
+    /* Assure que le label est aligné à gauche */
+}
+
+/* Style pour les étiquettes (ex: "Adresse e-mail") */
+.form-group label {
+    display: block;
+    /* Affiche le label sur sa propre ligne */
+    margin-bottom: 8px;
+    /* Petit espace entre le label et le champ de saisie */
+    font-weight: 500;
+    /* Police légèrement plus grasse */
+    font-size: 14px;
+    color: #333;
+    /* Couleur de texte sombre mais pas noir pur */
+}
+
+/* Style de base pour les champs de saisie (input) */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    /* Prend toute la largeur disponible */
+    padding: 12px 15px;
+    /* Espace intérieur pour que le texte ne colle pas aux bords */
+    border: 1px solid #ddd;
+    /* Bordure grise très claire, comme sur la 1ère image */
+    border-radius: 6px;
+    /* Bords arrondis pour un look moderne */
+    font-size: 16px;
+    /* Taille de police lisible */
+    box-sizing: border-box;
+    /* Essentiel pour que le padding n'augmente pas la largeur totale */
+    background-color: #fdfdfd;
+    /* Un fond très légèrement grisé */
+
+    /* Transition douce pour l'effet de focus */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Effet visuel lorsque l'utilisateur clique sur le champ (état :focus) */
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+    outline: none;
+    /* Supprime la bordure par défaut du navigateur (souvent bleue ou noire) */
+    border-color: #007bff;
+    /* Change la couleur de la bordure en bleu (la couleur du bouton) */
+    /* Ajoute une "ombre" ou une lueur subtile pour indiquer clairement le focus */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* Style pour le texte de placeholder (ex: "Ex: RCV-ABCD-1234") */
+.form-group input::placeholder {
+    color: #aaa;
+    /* Couleur grise plus claire pour le placeholder */
+}
+
+/* Style de la zone de drag-and-drop */
+.file-drop-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: background-color 0.2s, border-color 0.2s;
+    text-align: center;
+}
+
+.file-drop-area.is-dragover {
+    background-color: #e9f5ff;
+    border-color: #2e5ce5;
+}
+
+.file-drop-icon {
+    /* -- On supprime les propriétés pour les polices -- */
+    /* font-size: 3rem; */
+    /* Ne s'applique pas aux images */
+    /* color: #a0a0a0; */
+    /* Ne s'applique pas aux images */
+
+    /* -- On ajoute des propriétés pour les images -- */
+    width: 60px;
+    /* Définit une largeur fixe. Ajuste cette valeur à ton goût. */
+    height: auto;
+    /* Maintient les proportions de l'image */
+
+    margin-bottom: 15px;
+    /* Garde l'espacement en dessous */
+    opacity: 0.7;
+    /* La rend un peu plus subtile, comme le gris de l'icône */
+}
+
+.file-drop-message {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.file-browse-link {
+    color: #2e5ce5;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.file-drop-support {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 8px;
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.btn-submit {
+    background-color: #2e5ce5;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.btn-submit:hover {
+    background-color: #254bb5;
+}
+
+/* =================================================================== */
+/* == STYLES SPÉCIFIQUES POUR LES MENUS DÉROULANTS DE LA PAGE ADMIN == */
+/* =================================================================== */
+
+/* On prefixe toutes les règles avec .page-admin-doc pour les isoler */
+
+/* =================================================================== */
+/* == STYLES SPÉCIFIQUES POUR LES MENUS DÉROULANTS DE LA PAGE ADMIN == */
+/* (Avec une haute spécificité pour garantir l'application)          */
+/* =================================================================== */
+
+/* On utilise l'ID du formulaire pour s'assurer que ces règles gagnent */
+
+
+
+#admin-doc-form .custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    flex-grow: 1;
+
+}
+
+.custom-select-trigger.placeholder {
+
+    /* background-color: rgba(241, 244, 247, 0.935); */
+    span {
+        color: #2b2828;
+    }
+}
+
+.custom-select-trigger {
+    background-color: rgba(235, 235, 228, 0.49);
+
+    span {
+        color: #2b2828;
+    }
+
+    ;
+}
+
+
+
+
+#admin-doc-form .custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    height: 48px;
+    box-sizing: border-box;
+    color: #333;
+}
+
+#admin-doc-form .custom-select-wrapper .custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    height: 48px;
+    box-sizing: border-box;
+}
+
+#admin-doc-form .custom-select-wrapper .custom-select-trigger.disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    color: #888;
+}
+
+#admin-doc-form .custom-select-wrapper .original-select {
+    display: none;
+}
+
+#admin-doc-form .custom-select-trigger.disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    color: #888;
+}
+
+#admin-doc-form .custom-select-trigger:hover:not(.disabled) {
+    border-color: #888;
+}
+
+#admin-doc-form .custom-select-wrapper.open .custom-select-trigger {
+    border-color: #2e5ce5;
+    box-shadow: 0 0 0 2px rgba(46, 92, 229, 0.2);
+}
+
+#admin-doc-form .custom-select-trigger .arrow {
+    transition: transform 0.3s ease;
+    color: #888;
+}
+
+#admin-doc-form .custom-select-wrapper.open .arrow {
+    transform: rotate(180deg);
+}
+
+#admin-doc-form .custom-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+#admin-doc-form .custom-select-wrapper.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#admin-doc-form .custom-option {
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#admin-doc-form .custom-option:hover {
+    background-color: #f4f4f9;
+}
+
+#admin-doc-form .custom-option.selected {
+    background-color: #2e5ce5;
+    color: white;
+    font-weight: 500;
+}
+
+.admin-doc-container h2 {
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+
+/* Il reste fonctionnel mais n'est pas visible. */
+.custom-select-wrapper .original-select {
+    display: none;
+}
+
+/* En static/css/style.css */
+
+/* ============================================= */
+/* === STYLES POUR LA BARRE DE PROGRESSION   === */
+/* ============================================= */
+
+.progress-wrapper {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.progress-filename {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+}
+
+.progress-percent {
+    font-weight: bold;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Style de la barre pour Chrome/Safari/Edge */
+.progress-bar::-webkit-progress-bar {
+    background-color: #e9ecef;
+    border-radius: 12px;
+}
+
+.progress-bar::-webkit-progress-value {
+    background-color: #28a745;
+    border-radius: 12px;
+    transition: width 0.3s ease;
+}
+
+/* Style de la barre pour Firefox */
+.progress-bar::-moz-progress-bar {
+    background-color: #28a745;
+    border-radius: 12px;
+    transition: width 0.3s ease;
+}
+
+#upload-progress {
+    appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#upload-progress::-webkit-progress-bar {
+    background: #e9ecef;
+    border-radius: 4px;
+}
+
+#upload-progress::-webkit-progress-value {
+    background-color: #28a745;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+#load-progress-wrapper {
+    background: #f0f0f0;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+#load-progress {
+    width: 100%;
+    height: 1.2rem;
+}
+
+.filter-wrapper {
+    position: relative;
+}
+
+.filter-wrapper .search-bar {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 100px);
+    max-width: 800px;
+    padding: 10px 18px;
+    background-color: #e9ecef;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+
+
+.search-bar {
+    margin: 20px auto;
+    padding: 12px 16px;
+    border-radius: 999px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.search-bar input[type="text"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    flex: 1;
+    color: #333;
+}
+
+.search-bar input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.search-btn {
+    background-color: var(--amco-bleu-principal, #0d6efd);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-btn:hover {
+    background-color: #274ac6;
+}
+
+.search-btn i {
+    font-size: 16px;
+}
+
+/* Grille en deux colonnes responsive */
+.grille-cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 20px 0;
+}
+
+/* Conteneur scrollable si nécessaire */
+.cartes-requetes-scrollable {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 12px;
+    /* pour ne pas coller au bord */
+}
+
+/* Style de chaque carte */
+.carte-requete {
+    background: linear-gradient(135deg, #e9ecefc0, #e9ecefcd, rgba(255, 255, 255, 0.908));
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Effet au survol */
+.carte-requete:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Titre de la requête */
+.carte-requete h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #2c2c2c;
+}
+
+/* Description de la requête */
+.carte-requete p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+/* Bouton Exécuter */
+.carte-requete .btn-executer {
+    align-self: flex-start;
+    background-color: var(--amco-bleu-principal, #0d6efd);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.carte-requete .btn-executer:hover {
+    background-color: #274ac6;
+}
+
+.flash-messages {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.flash-message {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.flash-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.flash-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+.flash-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #bee5eb;
+}
+
+
+/*
+ * Style spécifique pour le conteneur du lien de renvoi
+ */
+.resend-link-container {
+    margin-top: 12px;
+    /* Espace entre le message principal et le lien */
+    font-size: 0.9em;
+    /* Taille de police légèrement réduite */
+}
+
+.resend-link-container a {
+    color: #0056b3;
+    /* Un bleu distinctif */
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.resend-link-container a:hover {
+    color: #003d82;
+    /* Un bleu plus sombre au survol */
+}
+
+/* static/css/style.css */
+
+/* Pour les pages d'erreur publiques (layout_auth) */
+.error-page-content {
+    text-align: center;
+    width: 100%;
+}
+
+.error-page-content .error-icon {
+    color: #dc3545;
+    /* Rouge pour l'erreur */
+    margin-bottom: 20px;
+}
+
+.error-page-content .error-code {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #6c757d;
+    /* Gris */
+    margin: 0;
+}
+
+.error-page-content .error-title {
+    font-size: 1.75rem;
+    margin-top: 10px;
+}
+
+.error-page-content .error-description {
+    color: #6c757d;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+/* Pour les pages d'erreur authentifiées (dans le layout principal) */
+.error-code-authed {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #adb5bd;
+}
+
+.error-title-authed {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+/* Style pour le conteneur des critères de mot de passe */
+.password-criteria {
+    background-color: #f8f9fa;
+    /* Fond gris clair */
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: -10px;
+    /* Pour le coller sous le champ de mot de passe */
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.password-criteria p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #333;
+}
+
+.password-criteria ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.password-criteria li {
+    margin-bottom: 5px;
+    /* transition pour un changement de couleur en douceur */
+    transition: color 0.3s ease;
+}
+
+/* Style par défaut (invalide) */
+.password-criteria li {
+    color: #dc3545;
+    /* Rouge pour invalide */
+}
+
+/* Style quand le critère est respecté (valide) */
+.password-criteria li.valide {
+    color: #28a745;
+    /* Vert pour valide */
+}
+
+/* Style pour l'icône */
+.password-criteria li i {
+    margin-right: 8px;
+    width: 16px;
+    /* Pour un alignement parfait */
+}
+
+
+/* ====================================================== */
+/* ==== STYLE "GLASSMORPHISM" POUR LA SECTION PRINCIPALE ==== */
+/* ====================================================== */
+/* static/css/style.css */
+
+/* ====================================================== */
+/* ==== STYLE DÉFINITIF POUR LA PAGE DE PROFIL (MINIMALISTE) ==== */
+/* ====================================================== */
+
+
+/* Si usas esta estructura */
+.profil-page .main-area {
+    /* O esta, por si acaso */
+    background: white;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* 2. Style du titre principal "Mon Profil" */
+.profil-titre-principal {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 12px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.page-profil .header-container p {
+    color: #7f8c8d;
+    margin-bottom: 40px;
+}
+
+/* =================================================================== */
+/* ===         STYLE GLASSPHORPHISM POUR LES CARTES                === */
+/* =================================================================== */
+
+/* 3. Style des cartes principales (effet verre) */
+.card-profil {
+    /* 1. Fond semi-transparent pour l'effet de verre */
+    background: rgba(255, 255, 255, 0.45); /* Blanc avec 45% d'opacité */
+
+    /* 2. L'effet de flou qui définit le glassmorphism */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Pour la compatibilité avec Safari */
+
+    /* 3. Une bordure subtile pour simuler le bord du verre */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    /* 4. Coins arrondis (on garde les tiens) */
+    border-radius: 12px;
+
+    /* 5. Une ombre douce pour soulever la carte du fond */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    margin-bottom: 25px;
+    overflow: hidden; /* Crucial pour que le flou ne dépasse pas les coins arrondis */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajout d'une transition douce */
+}
+
+/* On peut ajouter un petit effet au survol pour améliorer l'interactivité */
+.card-profil:hover {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+
+/* 4. En-tête des cartes (on l'adapte pour qu'il s'intègre bien) */
+.card-header-profil {
+    display: flex;
+    align-items: center;
+    /* On remplace la bordure inférieure par un fond légèrement différent pour créer une séparation subtile */
+    background: rgba(255, 255, 255, 0.15); /* Légèrement plus transparent ou plus opaque que la carte */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Bordure assortie */
+    padding-left: 0;
+}
+
+.card-header-profil h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 20px 25px;
+    color: #2c3e50;
+}
+
+.accent-bar {
+    width: 6px;
+    align-self: stretch;
+}
+
+.accent-info {
+    background-color: #2ecc71;
+}
+
+/* Vert */
+.accent-securite {
+    background-color: #007bff;
+}
+
+/* Rouge */
+
+/* 5. Contenu des cartes */
+.card-profil .card-body {
+    padding: 25px;
+}
+
+.card-profil .profil-info {
+    font-size: 1rem;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.card-profil .profil-info strong {
+    font-weight: 600;
+}
+
+.card-profil .text-muted {
+    font-size: 0.9rem;
+    color: #000000;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* 6. Conteneur du code de récupération */
+.code-container-profil {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.code-text-profil {
+    flex-grow: 1;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-container-profil .btn-primary {
+    flex-shrink: 0;
+    font-weight: 600;
+    margin-top: 0rem;
+}
+
+.code-container-profil .btn {
+    width: 30%;
+}
+
+
+/* 7. Action de régénération (style lien) */
+.regenerate-action {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.btn-link {
+    /* --- Style de la pilule de verre --- */
+    background: rgba(255, 255, 255, 0.25); /* Fond en verre subtil */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px; /* Pour une forme de pilule parfaite */
+    padding: 10px 20px; /* Marge interne pour que le texte "respire" */
+    
+    /* --- Style du texte pour une lisibilité maximale --- */
+    color: #1a5f99; /* Un bleu plus sombre et sobre */
+    font-size: 0.9rem;
+    font-weight: 600; /* On rend la police plus épaisse */
+    text-decoration: none; /* Pas de soulignement */
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7); /* Ombre claire pour faire ressortir le texte */
+
+    /* --- Effets et transitions --- */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-link:hover {
+    background: rgba(255, 255, 255, 0.4);
+    color: #0d3b66; /* Bleu encore plus foncé au survol */
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px); /* Petit effet de soulèvement */
+    text-decoration: none; /* On maintient sans soulignement */
+}
+
+/* Ajoutez ceci à l'une des options CSS précédentes */
+.btn-link i {
+    margin-right: 8px; /* Espace entre l'icône et le texte */
+}
+
+#modal-code-conteneur {
+    margin-bottom: 25px;
+    /* Espace entre le code et les boutons */
+    padding: 15px 20px;
+    /* Espace intérieur */
+
+    border: 1px solid #e9ecef;
+    /* Bordure subtile */
+    border-radius: 8px;
+    /* Coins arrondis */
+
+    /* On utilise flexbox pour centrer le code parfaitement */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2c3e50;
+}
+
+/* --- Le texte du code lui-même (à l'intérieur du conteneur) --- */
+#modal-code-affichage {
+    color: #ecf0f1;
+    /* Un bleu foncé pour une bonne lisibilité */
+    font-family: 'Courier New', Courier, monospace;
+    /* Police de type code */
+    font-size: 1.3rem;
+    /* Taille de police claire et lisible */
+    font-weight: bold;
+    letter-spacing: 2px;
+    /* Espace entre les lettres pour une meilleure lecture */
+}
+
+#btn-modal-regenerer:hover {
+    background-color: #dadde0;
+    color: #2c3e50;
+}
+
+#btn-modal-confirmer.btn-warning {
+    background-color: #c0392b;
+    /* Orange vif */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+
+/* --- Style pour le nouveau bouton de fermeture "X" --- */
+.modal-close-btn {
+    position: absolute;
+    top: 12px;
+    /* Ajuste vertical */
+    right: 15px;
+    /* Ajuste horizontal */
+
+    background: transparent;
+    border: none;
+
+    font-size: 2.2rem;
+    /* Taille de la croix */
+    font-weight: 300;
+    line-height: 1;
+    /* Pour un centrage vertical parfait */
+
+    color: #aaa;
+    /* Couleur grise par défaut */
+    cursor: pointer;
+
+    padding: 0;
+    margin: 0;
+    transform-origin: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+
+}
+
+.modal-close-btn:hover {
+    color: #e74c3c;
+    /* Rouge au survol */
+    transform: rotate(90deg);
+    /* Petite animation de rotation */
+}
+
+
+/* 2. Style pour le lien "Mot de passe oublié ?" */
+.forgot-password-link {
+    color: #6a4f9a;
+    /* Garde la couleur violette originale */
+    text-decoration: none;
+    /* Pas de soulignement par défaut pour un look plus propre */
+    font-size: 15px;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-link:hover {
+    color: #4d3973;
+    /* Une teinte plus foncée au survol */
+    text-decoration: underline;
+    /* Le soulignement apparaît au survol */
+}
+
+
+/* 3. Style pour le lien d'inscription en bas "Pas encore de compte ?" */
+.auth-links a {
+    color: #6a4f9a;
+    /* Même couleur que le lien ci-dessus pour la cohérence */
+    text-decoration: none;
+    /* Pas de soulignement par défaut */
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s ease;
+}
+
+.auth-links a:hover {
+    color: #4d3973;
+    /* Teinte plus foncée au survol */
+    text-decoration: underline;
+    /* Le soulignement apparaît au survol */
+}
+
+/* ============================================= */
+/* === STYLES POUR LES PAGES D'ERREUR        === */
+/* ============================================= */
+
+/* --- Style pour les pages d'erreur PUBLIQUES (non authentifié) --- */
+.error-page-content {
+    text-align: center;
+    width: 100%;
+}
+
+.error-page-content .error-icon {
+    color: #6c757d;
+    /* Gris sutil */
+    margin-bottom: 20px;
+}
+
+.error-page-content .error-code {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #343a40;
+    /* Gris oscuro */
+    margin: 0;
+}
+
+.error-page-content .error-title {
+    font-size: 1.75rem;
+    color: #343a40;
+    margin-top: 10px;
+}
+
+.error-page-content .error-description {
+    color: #6c757d;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+/* --- Style pour les pages d'erreur INTERNES (authentifié) --- */
+.error-content-authed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    color: white;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.error-code-authed {
+    font-size: 12rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.error-title-authed {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-top: -20px;
+    margin-bottom: 1rem;
+}
+
+.error-description-authed {
+    font-size: 1.2rem;
+    max-width: 500px;
+    margin-bottom: 2rem;
+}
+
+.btn-error-authed {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.error-icon-authed {
+    font-size: 6rem;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}

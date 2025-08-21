@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AMCO – Résultats de la requête avancée</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body data-user-id="{{ current_user.id }}" data-page="resultats-avances">
+    <div class="fond-ext">
+        <div class="superposition">
+            <div id="conteneur-notifications" class="conteneur-notifications"></div>
+            <div class="container">
+                <!-- Barre latérale (identique) -->
+                <nav class="sidebar">
+                    <ul class="nav-items">
+                        <li><img src="{{ url_for('static', filename='images/logo-groupe-amco.png') }}" alt="Logo"
+                                width="90"></li>
+                        <li><a href="{{ url_for('main.filtre_requete') }}" title="Requête simple"><i
+                                    class="fas fa-search"></i><span>Requête simple</span></a></li>
+                        <li class="active"><a href="{{ url_for('main.filtre_requete_avancee') }}"
+                                title="Requête avancée"><i class="fas fa-chart-line"></i><span>Requête
+                                    avancée</span></a></li>
+                        <li><a href="{{ url_for('main.documentation') }}" title="Documentation"><i
+                                    class="fas fa-file-alt"></i><span>Documentation</span></a></li>
+                        <li>
+                            <a href="{{ url_for('main.profil') }}" title="Mon Profil">
+                                <i class="fas fa-user"></i>
+                                <span>Mon Profil</span>
+                            </a>
+                        </li>
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
+                        <li><a href="{{ url_for('admin.panel_admin') }}" title="Administration"><i
+                                    class="fas fa-cog"></i><span>Administration</span></a></li>
+                        {% endif %}
+                    </ul>
+                    <div class="logout">
+                        <a href="{{ url_for('auth.logout') }}" title="Sortir"><i
+                                class="fas fa-sign-out-alt"></i><span>Sortir</span></a>
+                    </div>
+                </nav>
+
+                <!-- Contenu principal -->
+                <main class="content">
+                    <!-- 1) Entête avec bouton Retour (CORRIGÉ) -->
+                    <div class="results-header">
+                        <!-- CHANGEMENT: Le bouton pointe vers la page des cartes, pas l'historique -->
+                        <a href="{{ url_for('main.filtre_requete_avancee') }}" class="btn-back" aria-label="Retour">
+                            <img src="{{ url_for('static', filename='images/left-arrow.png') }}" alt="Retour" width="30"
+                                height="30">
+                        </a>
+                        <h1>Résultats de la requête</h1>
+                    </div>
+
+                    <!-- 2) Barre de téléchargement (identique) -->
+                    <div class="download-bar">
+                        <button class="download-main" id="btn-download">Télécharger</button>
+                        <div class="download-options toggle-group">
+                            <label>
+                                <input type="radio" name="download_format" value="csv" checked>
+                                <span>CSV</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="download_format" value="xlsx">
+                                <span>XLSX</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 3) Tableau des résultats (ADAPTÉ POUR LE BACKEND) -->
+                    <div class="carte">
+                        <div class="carte-corps">
+                            <div class="conteneur-defilement">
+                                <table class="table-donnees">
+                                    <thead>
+                                        <!-- Les en-têtes sont générés dynamiquement par le backend -->
+                                        <tr id="tableau-en-tete">
+                                            {% for col in colonnes %}
+                                            <th>{{ col.replace('_', ' ').title() }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <!-- Le corps de la table est généré dynamiquement par le backend -->
+                                    <tbody id="tableau-corps">
+                                        {% if donnees %}
+                                        {% for ligne in donnees %}
+                                        <tr>
+                                            {% for col in colonnes %}
+                                            <td>{{ ligne[col] }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="{{ colonnes|length or 1 }}" class="no-results"
+                                                style="text-align: center; padding: 20px;">
+                                                Aucun résultat trouvé pour les filtres sélectionnés.
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination (Pour l'instant statique, peut être activée avec JS plus tard) -->
+                    <div class="pagination">
+                        <button id="prev-page" disabled>←</button>
+                        <span class="page-indicator" id="page-number">1 / 1</span>
+                        <button id="next-page" disabled>→</button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script pour la fonctionnalité de téléchargement (SPÉCIFIQUE À CETTE PAGE) -->
+    <script>
+        // ÉTAPE 1: Injections des données du backend vers JavaScript
+        const allData = {{ donnees | tojson }};
+        const allColumns = {{ colonnes | tojson }};
+        const filtres = {{ filtres | tojson }};
+        const nom_fonction = "{{ nom_fonction }}";
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // ÉTAPE 2: Constantes et état de la pagination
+            const pageSize = 15; // Nombre de lignes par page
+            let currentPage = 1;
+            let totalPages = Math.ceil(allData.length / pageSize) || 1;
+
+            const tableBody = document.getElementById('tableau-corps');
+            const pageNumSpan = document.getElementById('page-number');
+            const btnPrev = document.getElementById('prev-page');
+            const btnNext = document.getElementById('next-page');
+            const btnDownload = document.getElementById('btn-download');
+
+            // ÉTAPE 3: Fonctions de rendu et de mise à jour
+            function renderTable() {
+                tableBody.innerHTML = ''; // Vide la table
+                const start = (currentPage - 1) * pageSize;
+                const end = start + pageSize;
+                const pageData = allData.slice(start, end);
+
+                if (pageData.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="${allColumns.length || 1}" class="no-results" style="text-align: center; padding: 20px;">
+                                Aucun résultat trouvé pour les filtres sélectionnés.
+                            </td>
+                        </tr>`;
+                    return;
+                }
+
+                pageData.forEach(ligne => {
+                    const tr = document.createElement('tr');
+                    let cells = '';
+                    allColumns.forEach(col => {
+                        cells += `<td>${ligne[col] !== null ? ligne[col] : ''}</td>`;
+                    });
+                    tr.innerHTML = cells;
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            function updatePagination() {
+                pageNumSpan.textContent = `${currentPage} / ${totalPages}`;
+                btnPrev.disabled = currentPage === 1;
+                btnNext.disabled = currentPage >= totalPages;
+            }
+
+            // ÉTAPE 4: Écouteurs d'événements
+            btnPrev.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                    updatePagination();
+                }
+            });
+
+            btnNext.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                    updatePagination();
+                }
+            });
+
+            // Logique de téléchargement (identique à avant)
+            if (btnDownload) {
+                btnDownload.addEventListener('click', async () => {
+                    const format = document.querySelector('input[name="download_format"]:checked').value;
+                    // ... (le reste de votre code de téléchargement reste ici, il est déjà correct)
+                    const originalText = btnDownload.textContent;
+                    btnDownload.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    btnDownload.disabled = true;
+
+                    try {
+                        const response = await fetch('/api/requete-avancee/download', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ format, nom_fonction, filtres })
+                        });
+
+                        if (!response.ok) throw new Error('Erreur du serveur.');
+
+                        const blob = await response.blob();
+                        const contentDisposition = response.headers.get('Content-Disposition');
+                        let filename = `export_avancee.${format}`;
+                        if (contentDisposition) {
+                            const match = contentDisposition.match(/filename="?(.+)"?/i);
+                            if (match) filename = match[1];
+                        }
+
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = filename;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(link.href);
+
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        alert(error.message);
+                    } finally {
+                        btnDownload.textContent = originalText;
+                        btnDownload.disabled = false;
+                    }
+                });
+            }
+
+            // ÉTAPE 5: Rendu initial
+            renderTable();
+            updatePagination();
+        });
+    </script>
+
+</body>
+
+</html>

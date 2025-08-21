@@ -1,0 +1,73 @@
+<!-- templates/layout_auth.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le titre sera défini par la page enfant (ex: "Connexion", "Inscription") -->
+    <title>{% block title %}AMCO{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="auth-page-body">
+
+    <!-- Conteneur pour les notifications JavaScript -->
+    <div id="conteneur-notifications" class="conteneur-notifications"></div>
+
+    <div class="auth-wrapper">
+        
+        <!-- Panneau de Gauche (Bienvenue) - Ne change jamais -->
+        <div class="auth-panel-welcome">
+            <div class="panel-content">
+                <img src="{{ url_for('static', filename='images/logo-groupe-amco.png') }}" alt="Logo AMCO" class="panel-logo">
+                <h2>Bienvenue</h2>
+                <p>Votre portail pour la consultation des données historiques chez AMCO.</p>
+            </div>
+        </div>
+
+        <!-- Panel de Droite (Formulaire) - C'est la partie qui va changer -->
+        <div class="auth-panel-form">
+            <div class="form-content">
+                
+                <!-- Zone pour afficher les messages flash (erreurs, succès, etc.) -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                <!-- 
+                                  On affiche le message. L'utilisation de `| safe` permettrait 
+                                  d'interpréter du HTML si jamais le message en contenait.
+                                -->
+                                {{ message | safe }}
+
+                                <!-- 
+                                  LOGIQUE D'AFFICHAGE DU LIEN DE RENVOI :
+                                  On vérifie si le message contient la phrase clé ET si sa catégorie est 'warning'.
+                                  Cela garantit que le lien n'apparaît que pour l'erreur spécifique du compte non activé.
+                                -->
+                                {% if category == 'warning' and 'compte n\'est pas encore activé' in message %}
+                                    <div class="resend-link-container">
+                                        <a href="{{ url_for('auth.resend_confirmation') }}">
+                                            Renvoyer l'e-mail de confirmation
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+
+                <!-- Ce bloc sera remplacé par le formulaire de connexion, d'inscription, etc. -->
+                {% block form_content %}{% endblock %}
+
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

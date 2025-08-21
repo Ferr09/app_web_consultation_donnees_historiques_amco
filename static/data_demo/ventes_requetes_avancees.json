@@ -1,0 +1,44 @@
+[
+  {
+    "id": "req_201",
+    "titre": "Top 20 clients par chiffre d’affaires",
+    "description": "Affiche les 20 clients ayant généré le plus de chiffre d’affaires sur une période donnée.",
+    "type": "rpc",
+    "nom_fonction": "top_clients_ca",
+    "champs_filtrables": [
+
+    ]
+  },
+  {
+    "id": "req_202",
+    "titre": "Répartition du CA par famille d’articles",
+    "description": "Permet de voir la répartition du chiffre d’affaires par famille d’articles pour chaque client.",
+    "type": "rpc",
+    "nom_fonction": "ca_par_client_et_famille",
+    "champs_filtrables": [
+      { "valeur": "p_code_client", "texte": "Code Client"}
+    ]
+  },
+  {
+    "id": "req_203",
+    "titre": "Évolution mensuelle du CA",
+    "description": "Suivi de l’évolution du chiffre d’affaires mois par mois.",
+    "type": "rpc",
+    "nom_fonction": "ca_par_periode",
+    "champs_filtrables": [
+      { "valeur": "p_code_client", "texte": "Code Client"},
+      { "valeur": "p_code_famille", "texte": "Famille article"}
+    ]
+  },
+  {
+    "id": "req_204",
+    "titre": "Top articles vendus par client",
+    "description": "Liste des articles les plus vendus, regroupés par client selon la quantité facturée.",
+    "type": "rpc",
+    "nom_fonction": "top_articles_par_client",
+    "champs_filtrables": [
+      { "valeur": "p_code_client", "texte": "Code Client"},
+      { "valeur": "p_code_famille", "texte": "Famille article"}
+    ]
+  }
+]

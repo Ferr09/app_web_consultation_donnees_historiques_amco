@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AMCO – Requête avancée</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="filtre-requete">
+  <div class="fond-ext">
+    <div class="superposition">
+      <div class="container">
+        <nav class="sidebar">
+          <ul class="nav-items">
+            <li>
+              <img src="{{ url_for('static', filename='images/logo-groupe-amco.png') }}" alt="Logo AMCO" width="90">
+            </li>
+            <li>
+              <a href="{{ url_for('main.filtre_requete') }}" title="Requête simple">
+                <i class="fas fa-search"></i>
+                <span>Requête simple</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url_for('main.filtre_requete_avancee') }}" title="Requête avancée">
+                <i class="fas fa-chart-line"></i>
+                <span>Requête avancée</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url_for('main.documentation') }}" title="Documentation">
+                <i class="fas fa-file-alt"></i>
+                <span>Documentation</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url_for('main.profil') }}" title="Mon Profil">
+                <i class="fas fa-user"></i>
+                <span>Mon Profil</span>
+              </a>
+            </li>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
+            <li>
+              <a href="{{ url_for('admin.panel_admin') }}" title="Administration">
+                <i class="fas fa-cog"></i>
+                <span>Administration</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+          <div class="logout">
+            <a href="{{ url_for('auth.logout') }}" title="Sortir">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Sortir</span>
+            </a>
+          </div>
+        </nav>
+
+        <main class="content">
+          <div class="filter-wrapper">
+            <header>
+              <h1>Requête avancée</h1>
+            </header>
+
+            <div class="transaction-selector-wrapper">
+              <div class="toggle-switch">
+                <input type="radio" id="transaction-ventes" name="type_transaction" value="ventes" checked>
+                <label for="transaction-ventes">Ventes</label>
+
+                <input type="radio" id="transaction-achats" name="type_transaction" value="achats">
+                <label for="transaction-achats">Achats</label>
+
+                <div class="switch-pill"></div>
+              </div>
+            </div>
+
+            <div class="search-bar">
+              <input type="text" id="search-titre" placeholder="Rechercher une requête...">
+              <button class="search-btn" type="button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+
+            <div class="cartes-requetes-scrollable">
+              <div class="grille-cartes" id="cartes-container"></div>
+              {% for requete in requetes_preconfig %}
+              <div class="carte-requete" data-titre="{{ requete.titre|lower }}">
+                <h3>{{ requete.titre }}</h3>
+                <p>{{ requete.description }}</p>
+                <button class="btn-executer">Exécuter</button>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+      </div>
+      </main>
+    </div>
+  </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

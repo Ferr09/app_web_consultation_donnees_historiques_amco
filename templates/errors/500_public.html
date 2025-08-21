@@ -1,0 +1,22 @@
+<!-- templates/errors/500_public.html -->
+
+{# On hérite du layout d'authentification, qui est le bon pour les pages publiques #}
+{% extends "layout_auth.html" %}
+
+{% block title %}Erreur Interne{% endblock %}
+
+{# Ce layout attend bien un bloc 'form_content' #}
+{% block form_content %}
+    <div class="error-page-content">
+        <div class="error-icon">
+            <i class="fas fa-server fa-3x"></i>
+        </div>
+        <h1 class="error-code">500</h1>
+        <h2 class="error-title">Erreur Interne du Serveur</h2>
+        <p class="error-description">
+            Quelque chose s'est mal passé de notre côté. Notre équipe technique a été informée.
+            Veuillez réessayer plus tard.
+        </p>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Retour à la page de connexion</a>
+    </div>
+{% endblock %}

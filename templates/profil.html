@@ -1,0 +1,68 @@
+<!-- templates/profil.html -->
+{% extends "template-page.html" %}
+
+
+
+{% block header %}
+<div class="guide-banner">
+    <div class="banner-content">Mon Profil
+    </div>
+</div>
+{% endblock %} {# Change le titre de la page #}
+
+{% block content %}
+<div class="page-profil">
+
+    <!-- CARTE 1: Informations du Compte -->
+    <div class="card card-profil">
+        <div class="card-header-profil">
+            <div class="accent-bar accent-info"></div> <!-- Barre de couleur -->
+            <h2>Informations du Compte</h2>
+        </div>
+        <div class="card-body">
+            <div class="profil-info">
+                <strong>Adresse e-mail :</strong>
+                <span>{{ user.email }}</span>
+            </div>
+            <div class="profil-info">
+                <strong>Nom :</strong>
+                <span>{{ user.nom }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTE 2: Sécurité -->
+    <div class="card card-profil">
+        <div class="card-header-profil">
+            <div class="accent-bar accent-securite"></div> <!-- Barre de couleur -->
+            <h2>Sécurité</h2>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">
+                Votre code de récupération est permanent. Il est nécessaire pour réinitialiser votre mot de passe si
+                vous l'oubliez. Conservez-le en lieu sûr.
+            </p>
+            <div class="code-container-profil">
+                <span id="recovery-code-display" class="code-text-profil">{{ user.data.recovery_code or 'N/A' }}</span>
+                <button id="btn-copy-code" class="btn btn-primary"><i class="fas fa-copy"></i> Copier</button>
+            </div>
+            <div class="regenerate-action">
+                <button id="btn-regenerate-code" class="btn btn-link">
+                    <i class="fas fa-sync-alt"></i> Régénérer mon code
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- On ajoute un modal de confirmation, réutilisé de la page admin -->
+<div id="modal-confirmation" class="modal-overlay">
+    <div class="modal-contenu">
+        <p id="modal-message">Êtes-vous sûr ?</p>
+        <div class="modal-actions">
+            <button id="btn-modal-annuler" class="btn btn-secondaire">Annuler</button>
+            <button id="btn-modal-confirmer" class="btn btn-danger">Confirmer</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

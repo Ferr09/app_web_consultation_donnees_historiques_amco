@@ -1,0 +1,43 @@
+[
+  {
+    "id": "req_301",
+    "titre": "Top fournisseurs par montant total",
+    "description": "Affiche les fournisseurs avec le montant d’achat HT le plus élevé sur la période.",
+    "type": "rpc",
+    "nom_fonction": "top_fournisseurs_total",
+    "champs_filtrables": [
+      { "valeur": "code_article", "texte": "Code article"}
+    ]
+  },
+  {
+    "id": "req_302",
+    "titre": "Évolution des achats mensuels",
+    "description": "Suivi des achats mensuels (HT) sur la période sélectionnée.",
+    "type": "rpc",
+    "nom_fonction": "evolution_achats_mensuels",
+    "champs_filtrables": [
+      { "valeur": "p_code_fournisseur", "texte": "Code fournisseur"}
+    ]
+  },
+  {
+    "id": "req_303",
+    "titre": "Articles les plus achetés",
+    "description": "Top 20 des articles les plus achetés sur une période donnée.",
+    "type": "rpc",
+    "nom_fonction": "articles_plus_achetes",
+    "champs_filtrables": [
+      { "valeur": "raison_sociale", "texte": "Raison sociale fournisseur"}
+    ]
+  },
+  {
+    "id": "req_304",
+    "titre": "Top articles par fournisseur",
+    "description": "Liste les articles les plus achetés regroupés par fournisseur.",
+    "type": "rpc",
+    "nom_fonction": "top_articles_par_client_achats",
+    "champs_filtrables": [
+      { "valeur": "p_code_fournisseur", "texte": "Code fournisseur"},
+      { "valeur": "p_code_famille", "texte": "Famille article"}
+    ]
+  } 
+]

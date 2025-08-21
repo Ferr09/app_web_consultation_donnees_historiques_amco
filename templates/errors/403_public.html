@@ -1,0 +1,15 @@
+{% extends "layout_auth.html" %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block form_content %}
+<div class="error-page-content">
+    <i class="fas fa-question-circle fa-4x error-icon"></i>
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page non trouvée</h1>
+    <p class="error-description">
+        Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
+    </p>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Retour à la connexion</a>
+</div>
+{% endblock %}

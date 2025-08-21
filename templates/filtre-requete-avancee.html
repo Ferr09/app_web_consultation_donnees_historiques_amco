@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AMCO – Filtres avancés</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body data-page="filtres-avances" data-requete-id="{{ requete.id }}" data-requete-type="{{ type_transaction }}">
+    <div class="fond-ext">
+        <div class="superposition">
+
+            <div id="conteneur-notifications" class="conteneur-notifications"></div>
+
+            <div class="container">
+                <nav class="sidebar">
+                    <ul class="nav-items">
+                        <li><img src="{{ url_for('static', filename='images/logo-groupe-amco.png') }}" alt="Logo"
+                                width="90"></li>
+                        <li><a href="{{ url_for('main.filtre_requete') }}"><i class="fas fa-search"></i><span>Requête
+                                    simple</span></a></li>
+                        <li><a href="{{ url_for('main.filtre_requete_avancee') }}"><i
+                                    class="fas fa-chart-line"></i><span>Requête avancée</span></a></li>
+                        <li><a href="{{ url_for('main.documentation') }}"><i
+                                    class="fas fa-file-alt"></i><span>Documentation</span></a></li>
+                        <li>
+                            <a href="{{ url_for('main.profil') }}" title="Mon Profil">
+                                <i class="fas fa-user"></i>
+                                <span>Mon Profil</span>
+                            </a>
+                        </li>
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
+                        <li><a href="{{ url_for('admin.panel_admin') }}"><i
+                                    class="fas fa-cog"></i><span>Administration</span></a></li>
+                        {% endif %}
+                    </ul>
+                    <div class="logout">
+                        <a href="{{ url_for('auth.logout') }}"><i
+                                class="fas fa-sign-out-alt"></i><span>Sortir</span></a>
+                    </div>
+                </nav>
+
+                <!-- Contenu principal -->
+                <main class="content">
+                    <div class="filter-wrapper">
+                        <div class="results-header">
+
+                            <button class="btn-back" onclick="window.history.back()" aria-label="Retour">
+                                <img src="{{ url_for('static', filename='images/left-arrow.png') }}" alt="Retour"
+                                    width="30" height="30">
+                            </button>
+                            <h1>{{ requete.titre }}</h1>
+
+                            <button id="btn-clear-all" class="btn-clear-all" title="Tout effacer">×</button>
+                        </div>
+
+                        <p style="margin-left: 20px; 
+                        color: #d6e0ff; 
+                        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);">{{ requete.description }}</p>
+
+                        <section class="main-area">
+                            <form id="form-advanced" method="POST"
+                                action="{{ url_for('main.resultat_requete_avancee') }}">
+                                <input type="hidden" name="nom_fonction" value="{{ requete.nom_fonction }}">
+                                <input type="hidden" name="type_transaction" value="{{ type_transaction }}">
+
+                                <!-- 1. Résultats matchent (facultatif si non utilisé) -->
+                                <div class="filter-block match-block">
+                                    <label class="match-label">Les résultats matchent</label>
+                                    <div class="toggle-group">
+                                        <label><input type="radio" name="match_mode" value="at_least_one"><span>Au moins
+                                                une</span></label>
+                                        <label><input type="radio" name="match_mode" value="all"
+                                                checked><span>Toutes</span></label>
+                                    </div>
+                                    <label class="match-label">condition/les conditions</label>
+                                </div>
+
+                                <!-- 2. Sélection de la période (copié depuis filtre-requete.html) -->
+                                <div class="filter-block">
+                                    <div class="period-layout">
+                                        <div class="period-layout__label">
+                                            <label>Sélectionnez la période :</label>
+                                        </div>
+                                        <div class="period-layout__controls">
+                                            <span class="clear-btn clear-period-btn" title="Effacer la période">×</span>
+                                            <div class="period-layout__input-stack">
+                                                <div class="date-group">
+                                                    <input type="number" id="start_year" name="start_year"
+                                                        placeholder="Année" class="year-input">
+                                                    <input type="number" id="start_month_visible" placeholder="Mois"
+                                                        class="month-input">
+                                                    <input type="hidden" id="start_month" name="start_month">
+                                                </div>
+                                                <span class="arrow-separator">→</span>
+                                                <div class="date-group">
+                                                    <input type="number" id="end_year" name="end_year"
+                                                        placeholder="Année" class="year-input">
+                                                    <input type="number" id="end_month_visible" placeholder="Mois"
+                                                        class="month-input">
+                                                    <input type="hidden" id="end_month" name="end_month">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 3. Champs dynamiques (sélection des filtres par champ) -->
+                                <div class="filter-block">
+                                    <label>Sélectionnez les champs :</label>
+                                    <div id="fields-container"></div>
+                                </div>
+
+                            </form>
+
+                        </section>
+                        <!-- 4. Bouton Rechercher -->
+                        <div class="filter-actions">
+                            <button form="form-advanced" type="submit" class="btn-rechercher-full">Rechercher</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    // On expose en JS la liste des champs visibles pour cette requête
+    <script>
+        window.CHAMPS_FILTRABLES = {{ requete.champs_filtrables | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+[
+  {
+    "Code fournisseur": "F001", "Raison sociale": "Fournitout Express", "Reference achat": "ACH-2024-001", "Bon de commande": "BC-83610", "date achat": "2023-05-18T00:00:00", "Qté fact": 15, "Total HT": 1425.6, "Total TTC": 1710.72, "code article": "ART-8821-DEMO", "Désignation": "Composant Alpha"
+  },
+  {
+    "Code fournisseur": "F002", "Raison sociale": "Buro-Pro SARL", "Reference achat": "ACH-2024-002", "Bon de commande": "BC-19872", "date achat": "2022-11-05T00:00:00", "Qté fact": 120, "Total HT": 6840, "Total TTC": 8208, "code article": null, "Désignation": "Fournitures de bureau"
+  },
+  {
+    "Code fournisseur": "F003", "Raison sociale": "Tech-Solutions SA", "Reference achat": "ACH-2024-003", "Bon de commande": "BC-54321", "date achat": "2024-01-20T00:00:00", "Qté fact": 8, "Total HT": 3800.0, "Total TTC": 4560.0, "code article": "ART-1101-DEMO", "Désignation": "Serveur rackable"
+  },
+  {
+    "Code fournisseur": "F004", "Raison sociale": "Logistique Plus", "Reference achat": "ACH-2024-004", "Bon de commande": "BC-90123", "date achat": "2023-09-11T00:00:00", "Qté fact": 250, "Total HT": 3750, "Total TTC": 4500, "code article": null, "Désignation": "Matériel d'emballage"
+  },
+  {
+    "Code fournisseur": "F005", "Raison sociale": "Office Discount", "Reference achat": "ACH-2024-005", "Bon de commande": "BC-23456", "date achat": "2024-03-01T00:00:00", "Qté fact": 50, "Total HT": 975.5, "Total TTC": 1170.6, "code article": "ART-5050-DEMO", "Désignation": "Cartouches d'encre"
+  },
+  {
+    "Code fournisseur": "F001", "Raison sociale": "Fournitout Express", "Reference achat": "ACH-2024-006", "Bon de commande": "BC-67890", "date achat": "2023-07-22T00:00:00", "Qté fact": 30, "Total HT": 1230, "Total TTC": 1476, "code article": null, "Désignation": "Pièces détachées diverses"
+  },
+  {
+    "Code fournisseur": "F006", "Raison sociale": "Composants & Cie", "Reference achat": "ACH-2024-007", "Bon de commande": "BC-11223", "date achat": "2022-12-15T00:00:00", "Qté fact": 5, "Total HT": 2450, "Total TTC": 2940, "code article": "ART-9876-DEMO", "Désignation": "Micro-contrôleurs"
+  },
+  {
+    "Code fournisseur": "F002", "Raison sociale": "Buro-Pro SARL", "Reference achat": "ACH-2024-008", "Bon de commande": "BC-44556", "date achat": "2024-02-14T00:00:00", "Qté fact": 75, "Total HT": 2250, "Total TTC": 2700, "code article": null, "Désignation": "Papier A4"
+  },
+  {
+    "Code fournisseur": "F007", "Raison sociale": "Le Géant du Papier", "Reference achat": "ACH-2024-009", "Bon de commande": "BC-77889", "date achat": "2023-10-30T00:00:00", "Qté fact": 1000, "Total HT": 4500, "Total TTC": 5400, "code article": null, "Désignation": "Enveloppes C5"
+  },
+  {
+    "Code fournisseur": "F003", "Raison sociale": "Tech-Solutions SA", "Reference achat": "ACH-2024-010", "Bon de commande": "BC-99001", "date achat": "2023-04-19T00:00:00", "Qté fact": 2, "Total HT": 1598, "Total TTC": 1917.6, "code article": "ART-2048-DEMO", "Désignation": "Écran 27 pouces"
+  },
+  {
+    "Code fournisseur": "F008", "Raison sociale": "Innov-Materiel", "Reference achat": "ACH-2024-011", "Bon de commande": "BC-12121", "date achat": "2024-04-01T00:00:00", "Qté fact": 10, "Total HT": 7890, "Total TTC": 9468, "code article": "ART-7777-DEMO", "Désignation": "Imprimante Laser"
+  },
+  {
+    "Code fournisseur": "F005", "Raison sociale": "Office Discount", "Reference achat": "ACH-2024-012", "Bon de commande": "BC-34343", "date achat": "2023-01-25T00:00:00", "Qté fact": 200, "Total HT": 1500, "Total TTC": 1800, "code article": null, "Désignation": "Stylos bille (lot de 50)"
+  },
+  {
+    "Code fournisseur": "F001", "Raison sociale": "Fournitout Express", "Reference achat": "ACH-2024-013", "Bon de commande": "BC-56565", "date achat": "2023-08-08T00:00:00", "Qté fact": 45, "Total HT": 2250, "Total TTC": 2700, "code article": "ART-3322-DEMO", "Désignation": "Disque Dur SSD 1To"
+  },
+  {
+    "Code fournisseur": "F004", "Raison sociale": "Logistique Plus", "Reference achat": "ACH-2024-014", "Bon de commande": "BC-78787", "date achat": "2022-10-10T00:00:00", "Qté fact": 500, "Total HT": 6000, "Total TTC": 7200, "code article": null, "Désignation": "Palettes Europe"
+  },
+  {
+    "Code fournisseur": "F009", "Raison sociale": "Eco-Packaging", "Reference achat": "ACH-2024-015", "Bon de commande": "BC-90909", "date achat": "2024-02-28T00:00:00", "Qté fact": 300, "Total HT": 1800, "Total TTC": 2160, "code article": null, "Désignation": "Cartons double cannelure"
+  },
+  {
+    "Code fournisseur": "F006", "Raison sociale": "Composants & Cie", "Reference achat": "ACH-2024-016", "Bon de commande": "BC-24680", "date achat": "2023-11-12T00:00:00", "Qté fact": 12, "Total HT": 4200, "Total TTC": 5040, "code article": "ART-1234-DEMO", "Désignation": "Processeur i7"
+  },
+  {
+    "Code fournisseur": "F002", "Raison sociale": "Buro-Pro SARL", "Reference achat": "ACH-2024-017", "Bon de commande": "BC-13579", "date achat": "2023-06-05T00:00:00", "Qté fact": 90, "Total HT": 3150, "Total TTC": 3780, "code article": null, "Désignation": "Classeurs à levier"
+  },
+  {
+    "Code fournisseur": "F007", "Raison sociale": "Le Géant du Papier", "Reference achat": "ACH-2024-018", "Bon de commande": "BC-86420", "date achat": "2024-03-15T00:00:00", "Qté fact": 2000, "Total HT": 8000, "Total TTC": 9600, "code article": "ART-4567-DEMO", "Désignation": "Rames de papier recyclé"
+  },
+  {
+    "Code fournisseur": "F003", "Raison sociale": "Tech-Solutions SA", "Reference achat": "ACH-2024-019", "Bon de commande": "BC-57913", "date achat": "2023-12-20T00:00:00", "Qté fact": 1, "Total HT": 1250, "Total TTC": 1500, "code article": null, "Désignation": "Routeur Wi-Fi 6"
+  },
+  {
+    "Code fournisseur": "F010", "Raison sociale": "Services Propres", "Reference achat": "ACH-2024-020", "Bon de commande": "BC-25814", "date achat": "2023-02-02T00:00:00", "Qté fact": 60, "Total HT": 900, "Total TTC": 1080, "code article": "ART-7890-DEMO", "Désignation": "Produit nettoyant multi-surfaces"
+  },
+  {
+    "Code fournisseur": "F008", "Raison sociale": "Innov-Materiel", "Reference achat": "ACH-2024-021", "Bon de commande": "BC-36925", "date achat": "2024-01-10T00:00:00", "Qté fact": 3, "Total HT": 2997, "Total TTC": 3596.4, "code article": null, "Désignation": "Oscilloscope numérique"
+  },
+  {
+    "Code fournisseur": "F001", "Raison sociale": "Fournitout Express", "Reference achat": "ACH-2024-022", "Bon de commande": "BC-14725", "date achat": "2023-09-01T00:00:00", "Qté fact": 25, "Total HT": 1875.25, "Total TTC": 2250.3, "code article": "ART-1111-DEMO", "Désignation": "Jeu de clés Allen"
+  },
+  {
+    "Code fournisseur": "F005", "Raison sociale": "Office Discount", "Reference achat": "ACH-2024-023", "Bon de commande": "BC-85214", "date achat": "2022-11-28T00:00:00", "Qté fact": 150, "Total HT": 1125, "Total TTC": 1350, "code article": null, "Désignation": "Agrafeuses (lot de 10)"
+  },
+  {
+    "Code fournisseur": "F009", "Raison sociale": "Eco-Packaging", "Reference achat": "ACH-2024-024", "Bon de commande": "BC-96385", "date achat": "2023-05-15T00:00:00", "Qté fact": 400, "Total HT": 2200, "Total TTC": 2640, "code article": "ART-2222-DEMO", "Désignation": "Rouleaux de film à bulles"
+  },
+  {
+    "Code fournisseur": "F004", "Raison sociale": "Logistique Plus", "Reference achat": "ACH-2024-025", "Bon de commande": "BC-74196", "date achat": "2024-03-22T00:00:00", "Qté fact": 600, "Total HT": 6600, "Total TTC": 7920, "code article": null, "Désignation": "Ruban adhésif"
+  },
+  {
+    "Code fournisseur": "F002", "Raison sociale": "Buro-Pro SARL", "Reference achat": "ACH-2024-026", "Bon de commande": "BC-36987", "date achat": "2023-10-05T00:00:00", "Qté fact": 80, "Total HT": 2800, "Total TTC": 3360, "code article": "ART-3333-DEMO", "Désignation": "Tableau blanc magnétique"
+  },
+  {
+    "Code fournisseur": "F006", "Raison sociale": "Composants & Cie", "Reference achat": "ACH-2024-027", "Bon de commande": "BC-15975", "date achat": "2022-12-30T00:00:00", "Qté fact": 18, "Total HT": 5400, "Total TTC": 6480, "code article": null, "Désignation": "Cartes graphiques"
+  },
+  {
+    "Code fournisseur": "F010", "Raison sociale": "Services Propres", "Reference achat": "ACH-2024-028", "Bon de commande": "BC-75395", "date achat": "2024-02-18T00:00:00", "Qté fact": 120, "Total HT": 1500, "Total TTC": 1800, "code article": "ART-4444-DEMO", "Désignation": "Sacs poubelle 100L"
+  },
+  {
+    "Code fournisseur": "F007", "Raison sociale": "Le Géant du Papier", "Reference achat": "ACH-2024-029", "Bon de commande": "BC-95175", "date achat": "2023-08-20T00:00:00", "Qté fact": 3000, "Total HT": 10500, "Total TTC": 12600, "code article": null, "Désignation": "Papier photo A4"
+  },
+  {
+    "Code fournisseur": "F003", "Raison sociale": "Tech-Solutions SA", "Reference achat": "ACH-2024-030", "Bon de commande": "BC-35795", "date achat": "2023-03-10T00:00:00", "Qté fact": 4, "Total HT": 2800, "Total TTC": 3360, "code article": "ART-5555-DEMO", "Désignation": "Switch réseau 24 ports"
+  },
+  {
+    "Code fournisseur": "F001", "Raison sociale": "Fournitout Express", "Reference achat": "ACH-2024-031", "Bon de commande": "BC-46820", "date achat": "2024-04-12T00:00:00", "Qté fact": 35, "Total HT": 2100, "Total TTC": 2520, "code article": null, "Désignation": "Tournevis de précision"
+  },
+  {
+    "Code fournisseur": "F008", "Raison sociale": "Innov-Materiel", "Reference achat": "ACH-2024-032", "Bon de commande": "BC-57931", "date achat": "2023-11-01T00:00:00", "Qté fact": 7, "Total HT": 6860, "Total TTC": 8232, "code article": "ART-6666-DEMO", "Désignation": "Alimentation de laboratoire"
+  },
+  {
+    "Code fournisseur": "F004", "Raison sociale": "Logistique Plus", "Reference achat": "ACH-2024-033", "Bon de commande": "BC-68042", "date achat": "2023-01-15T00:00:00", "Qté fact": 750, "Total HT": 7500, "Total TTC": 9000, "code article": null, "Désignation": "Film étirable"
+  },
+  {
+    "Code fournisseur": "F009", "Raison sociale": "Eco-Packaging", "Reference achat": "ACH-2024-034", "Bon de commande": "BC-79153", "date achat": "2024-02-05T00:00:00", "Qté fact": 500, "Total HT": 2500, "Total TTC": 3000, "code article": "ART-7778-DEMO", "Désignation": "Sacs kraft"
+  },
+  {
+    "Code fournisseur": "F005", "Raison sociale": "Office Discount", "Reference achat": "ACH-2024-035", "Bon de commande": "BC-80264", "date achat": "2023-07-18T00:00:00", "Qté fact": 250, "Total HT": 1625, "Total TTC": 1950, "code article": null, "Désignation": "Post-it (pack de 12)"
+  },
+  {
+    "Code fournisseur": "F002", "Raison sociale": "Buro-Pro SARL", "Reference achat": "ACH-2024-036", "Bon de commande": "BC-91375", "date achat": "2022-10-20T00:00:00", "Qté fact": 110, "Total HT": 4400, "Total TTC": 5280, "code article": "ART-8888-DEMO", "Désignation": "Fauteuil de bureau ergonomique"
+  },
+  {
+    "Code fournisseur": "F010", "Raison sociale": "Services Propres", "Reference achat": "ACH-2024-037", "Bon de commande": "BC-13579", "date achat": "2023-12-01T00:00:00", "Qté fact": 80, "Total HT": 1040, "Total TTC": 1248, "code article": null, "Désignation": "Distributeur de savon"
+  },
+  {
+    "Code fournisseur": "F006", "Raison sociale": "Composants & Cie", "Reference achat": "ACH-2024-038", "Bon de commande": "BC-24680", "date achat": "2024-03-08T00:00:00", "Qté fact": 22, "Total HT": 7700, "Total TTC": 9240, "code article": "ART-9999-DEMO", "Désignation": "Mémoire RAM 16Go DDR5"
+  },
+  {
+    "Code fournisseur": "F003", "Raison sociale": "Tech-Solutions SA", "Reference achat": "ACH-2024-039", "Bon de commande": "BC-35791", "date achat": "2023-06-25T00:00:00", "Qté fact": 6, "Total HT": 4500, "Total TTC": 5400, "code article": null, "Désignation": "Clavier mécanique"
+  },
+  {
+    "Code fournisseur": "F007", "Raison sociale": "Le Géant du Papier", "Reference achat": "ACH-2024-040", "Bon de commande": "BC-46802", "date achat": "2023-09-14T00:00:00", "Qté fact": 2500, "Total HT": 9375, "Total TTC": 11250, "code article": "ART-1010-DEMO", "Désignation": "Carton plume A1"
+  },
+  {
+    "Code fournisseur": "F001", "Raison sociale": "Fournitout Express", "Reference achat": "ACH-2024-041", "Bon de commande": "BC-57913", "date achat": "2024-01-05T00:00:00", "Qté fact": 50, "Total HT": 3250, "Total TTC": 3900, "code article": null, "Désignation": "Gants de protection"
+  },
+  {
+    "Code fournisseur": "F008", "Raison sociale": "Innov-Materiel", "Reference achat": "ACH-2024-042", "Bon de commande": "BC-68024", "date achat": "2023-04-30T00:00:00", "Qté fact": 9, "Total HT": 9450, "Total TTC": 11340, "code article": "ART-2121-DEMO", "Désignation": "Station de soudage"
+  },
+  {
+    "Code fournisseur": "F002", "Raison sociale": "Buro-Pro SARL", "Reference achat": "ACH-2024-043", "Bon de commande": "BC-79135", "date achat": "2022-11-18T00:00:00", "Qté fact": 130, "Total HT": 5200, "Total TTC": 6240, "code article": null, "Désignation": "Destructeur de documents"
+  },
+  {
+    "Code fournisseur": "F005", "Raison sociale": "Office Discount", "Reference achat": "ACH-2024-044", "Bon de commande": "BC-80246", "date achat": "2023-08-10T00:00:00", "Qté fact": 300, "Total HT": 1800, "Total TTC": 2160, "code article": "ART-3232-DEMO", "Désignation": "Marqueurs (lot de 10)"
+  },
+  {
+    "Code fournisseur": "F009", "Raison sociale": "Eco-Packaging", "Reference achat": "ACH-2024-045", "Bon de commande": "BC-91357", "date achat": "2024-03-20T00:00:00", "Qté fact": 600, "Total HT": 3000, "Total TTC": 3600, "code article": "ART-4343-DEMO", "Désignation": "Pochettes d'expédition"
+  },
+  {
+    "Code fournisseur": "F004", "Raison sociale": "Logistique Plus", "Reference achat": "ACH-2024-046", "Bon de commande": "BC-12468", "date achat": "2023-10-12T00:00:00", "Qté fact": 800, "Total HT": 8800, "Total TTC": 10560, "code article": null, "Désignation": "Étiquettes d'expédition"
+  },
+  {
+    "Code fournisseur": "F007", "Raison sociale": "Le Géant du Papier", "Reference achat": "ACH-2024-047", "Bon de commande": "BC-23579", "date achat": "2023-01-28T00:00:00", "Qté fact": 1500, "Total HT": 6000, "Total TTC": 7200, "code article": null, "Désignation": "Carnets de notes"
+  },
+  {
+    "Code fournisseur": "F010", "Raison sociale": "Services Propres", "Reference achat": "ACH-2024-048", "Bon de commande": "BC-34690", "date achat": "2024-04-05T00:00:00", "Qté fact": 90, "Total HT": 1260, "Total TTC": 1512, "code article": "ART-5454-DEMO", "Désignation": "Essuie-mains en papier"
+  },
+  {
+    "Code fournisseur": "F006", "Raison sociale": "Composants & Cie", "Reference achat": "ACH-2024-049", "Bon de commande": "BC-45701", "date achat": "2023-05-20T00:00:00", "Qté fact": 25, "Total HT": 9250, "Total TTC": 11100, "code article": "ART-6565-DEMO", "Désignation": "SSD NVMe 2To"
+  }
+]

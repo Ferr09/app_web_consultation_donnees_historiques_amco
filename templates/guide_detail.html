@@ -1,0 +1,46 @@
+{% extends 'template-page.html' %}
+
+{% set hide_header = True %}
+
+{% block title %}AMCO - {{ current_sub_item.title }}{% endblock %}
+
+{% block body_class %}page-guide-detail{% endblock %}
+
+{% block content %}
+<div class="guide-detail-container">
+    
+    <!-- Menu de navigation spécifique à la catégorie -->
+    <aside class="guide-sidebar">
+        <a href="{{ url_for('main.documentation') }}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Retour aux catégories
+        </a>
+        <div class="sidebar-category-title">{{ category_data.title }}</div>
+        <nav>
+            <ul>
+                {# On boucle sur les sous-items de la catégorie actuelle #}
+                {% for sub_slug, sub_item in category_data.sub_items.items() %}
+                    <li>
+                        <a href="{{ url_for('main.guide_detail', category_slug=category_slug, sub_item_slug=sub_slug) }}" 
+                           class="{{ 'active' if sub_slug == current_sub_item_slug }}">
+                           {{ sub_item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenu principal avec le titre et le PDF du sous-item -->
+    <main class="guide-content">
+        <h1>{{ current_sub_item.title }}</h1>
+        <div class="pdf-viewer-container">
+            <iframe 
+                src="{{ url_for('static', filename='pdfs/' + current_sub_item.pdf) }}" 
+                class="pdf-viewer-iframe"
+                title="Visualiseur de PDF pour {{ current_sub_item.title }}">
+            </iframe>
+        </div>
+    </main>
+
+</div>
+{% endblock %}

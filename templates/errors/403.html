@@ -1,0 +1,17 @@
+{% extends "template-page.html" %}
+
+{% block title %}Accès Interdit{% endblock %}
+
+{% block content %}
+<div class="error-content-authed">
+    {# Ícono de la mano roja #}
+    <i class="fas fa-hand-paper error-icon-authed"></i>
+
+    <div class="error-code-authed">403</div>
+    <h1 class="error-title-authed">Accès Interdit</h1>
+    <p class="error-description-authed">
+        Désolé, vous n'avez pas les permissions nécessaires pour accéder à cette page. Si vous pensez que c'est une erreur, veuillez contacter un administrateur.
+    </p>
+    <a href="{{ url_for('main.filtre_requete') }}" class="btn btn-primary btn-error-authed">Retour à la page principale</a>
+</div>
+{% endblock %}
