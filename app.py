@@ -177,7 +177,9 @@ def create_app():
 
     return app
 
+# On appelle la factory pour créer l'instance de l'application.
+# Cette variable 'app' est maintenant globale et Vercel pourra la trouver.
+app = create_app()
 # --- Point d'entrée pour l'exécution directe ---
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=app.config['DEBUG'])
