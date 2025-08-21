@@ -177,8 +177,9 @@ def favicon():
         mimetype='image/vnd.microsoft.icon'
     )
 
+
 @main.route('/')
-def accueil():
+def index():
     return redirect(url_for('auth.login')) # Redirige vers la page de connexion du blueprint 'auth'
 
 @main.route('/filtre-requete')
