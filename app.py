@@ -103,12 +103,17 @@ def load_user(user_id):
 # =======================================================
 # ==== LA FABRIQUE D'APPLICATIONS (APPLICATION FACTORY) ====
 # =======================================================
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 def create_app():
     """
     Crée et configure une instance de l'application Flask.
     C'est le point central de l'application.
     """
-    app = Flask(__name__)
+    app = Flask(__name__,
+                static_folder=os.path.join(basedir, 'static'),
+                template_folder=os.path.join(basedir, 'templates'))
+
     
     # --- 1. CONFIGURATION DE L'APPLICATION ---
     # Charge la configuration depuis les variables d'environnement et l'objet de config.
