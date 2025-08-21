@@ -120,7 +120,6 @@ def create_app():
     # --- Initialisation des extensions importées ---
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
-    mail.init_app(app)
     oauth.init_app(app) # Initialise l'objet oauth importé
     
     # On enregistre le client Google sur l'objet oauth importé
