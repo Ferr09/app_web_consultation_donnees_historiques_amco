@@ -180,6 +180,10 @@ def favicon():
 def index():
     return redirect(url_for('auth.login')) # Redirige vers la page de connexion du blueprint 'auth'
 
+@main.route("/google8e445c41a5256094.html")  # Nom EXACT fourni par Google
+def google_verification_html():
+    return render_template("google8e445c41a5256094.html")
+
 @main.route('/filtre-requete')
 @login_required
 def filtre_requete():
