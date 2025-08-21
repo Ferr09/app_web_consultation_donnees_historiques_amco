@@ -1,27 +1,60 @@
-# Fichier des variables d'environnement
+# =======================================================
+# == Fichiers de Secrets et de Configuration Locale
+# NE JAMAIS PUBLIER CES FICHIERS SUR GIT !
+# =======================================================
 .env
 
-# Fichiers de cache Python
+# =======================================================
+# == Cache et Fichiers Générés par Python
+# =======================================================
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Environnement virtuel (si vous en utilisez un nommé 'venv')
+# =======================================================
+# == Environnement Virtuel Python
+# Peut être recréé à partir de requirements.txt
+# =======================================================
 venv/
 .venv/
+env/
+*.env
 
 # Fichiers de dépendances générés
 *.egg-info/
 
-# Données des utilisateurs de l'application
-data/users.json
-
-# Fichiers de base de données SQLite
+# =======================================================
+# == Fichiers de Base de Données
+# Contiennent des données qui changent constamment et peuvent être sensibles
+# =======================================================
 *.db
 *.sqlite
 *.sqlite3
 database.db
 
-# Fichiers de configuration de l'application
+# =======================================================
+# == Dépendances Node.js (de votre dossier /api)
+# Peuvent être réinstallées avec 'npm install'
+# =======================================================
+node_modules/
+
+# =======================================================
+# == Fichiers Spécifiques au Système d'Exploitation
+# =======================================================
 .DS_Store
+Thumbs.db
+
+# =======================================================
+# == Fichiers des IDEs et Éditeurs de Code
+# =======================================================
+.vscode/
+.idea/
+*.suo
+*.user
+
+
+# =======================================================
+# == Fichiers temporaires ou accidentels
+# =======================================================
+2.0.1
