@@ -6,6 +6,10 @@
     <title>{% block title %}AMCO - Interface{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+    // Définition de la variable STATIC_URL pour l'utilisation dans le JavaScript
+        const STATIC_URL = "{{ url_for('static', filename='') }}";
+    </script>
 </head>
 
 <body data-user-id="{{ current_user.id }}" data-page="resultats-simples">
@@ -68,7 +72,7 @@
                     <!-- 1) Entête avec bouton Retour -->
                     <div class="results-header">
                         <button class="btn-back" onclick="window.history.back()" aria-label="Retour">
-                            <img src="../static/images/left-arrow.png" alt="Retour" width="30" height="30">
+                            <img src="{{ url_for('static', filename='images/left-arrow.png') }}" alt="Retour" width="30" height="30">
                         </button>
                         <h1>Résultats de la requête</h1>
                     </div>

@@ -26,7 +26,7 @@
 <div class="admin-doc-container">
     <div class="results-header">
         <button class="btn-back" onclick="window.history.back()" aria-label="Retour">
-            <img src="../static/images/left-arrow.png" alt="Retour" width="30" height="30">
+            <img src="{{ url_for('static', filename='images/left-arrow.png') }}" alt="Retour" width="30" height="30">
         </button>
         <h1>{% block header %}Gérer la documentation{% endblock %}</h1>
     </div>
