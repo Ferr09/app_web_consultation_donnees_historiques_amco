@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from config import DevelopmentConfig, ProductionConfig
 # On importe nos instances d'extensions depuis le nouveau fichier
-from extensions import login_manager, mail, oauth
+from extensions import login_manager, oauth
 # Dans auth.py
 from utils import (
     find_user_by_email, 

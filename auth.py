@@ -22,7 +22,7 @@ from utils import (
 
 # On importe les extensions initialisées dans app.py.
 # Cela fonctionnera grâce à la structure de la fabrique d'application.
-from extensions import mail, oauth
+from extensions import oauth
 from app import load_user, Utilisateur
 from werkzeug.security import check_password_hash
 

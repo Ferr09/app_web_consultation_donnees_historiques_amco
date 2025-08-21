@@ -5,7 +5,6 @@ import json
 from mailbox import Message
 from flask import current_app
 from itsdangerous import URLSafeTimedSerializer
-from extensions import mail
 import secrets
 import string
 import random
