@@ -103,26 +103,34 @@ def load_user(user_id):
 # ==== LA FABRIQUE D'APPLICATIONS (APPLICATION FACTORY) ====
 # =======================================================
 def create_app():
+    """
+    Crée et configure une instance de l'application Flask.
+    C'est le point central de l'application.
+    """
     app = Flask(__name__)
     
-    app.config['SERVER_NAME'] = os.getenv('FLASK_SERVER_NAME', 'localhost:5000')
-    app.config['SETUP_CODE'] = os.getenv('SETUP_CODE')
-    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)  # Durée de vie des sessions
-
+    # --- 1. CONFIGURATION DE L'APPLICATION ---
+    # Charge la configuration depuis les variables d'environnement et l'objet de config.
     env_config = os.environ.get('FLASK_ENV', 'development')
     config_object = ProductionConfig if env_config == 'production' else DevelopmentConfig
     app.config.from_object(config_object)
     
-    print(f"🔧 Démarrage en mode : {env_config}")
-
-    global serializer, db_disponible, supabase
+    # Surcharge les configurations spécifiques qui ne viennent pas de l'objet.
+    app.config['SERVER_NAME'] = os.getenv('FLASK_SERVER_NAME', 'localhost:5000')
+    app.config['SETUP_CODE'] = os.getenv('SETUP_CODE')
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
     
-    # --- Initialisation des extensions importées ---
+    # --- 2. INITIALISATION DES EXTENSIONS ---
+    # Initialise toutes les extensions avec l'instance de l'application.
+    # Ceci lie les extensions à notre application pour qu'elles puissent être utilisées.
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
-    oauth.init_app(app) # Initialise l'objet oauth importé
+    oauth.init_app(app)
     
-    # On enregistre le client Google sur l'objet oauth importé
+    # --- 3. CONFIGURATION DES SERVICES (OAuth, Supabase, etc.) ---
+    # Ceci est fait après que la configuration et les extensions sont prêtes.
+    
+    # Client Google
     oauth.register(
         name='google',
         client_id=app.config['GOOGLE_CLIENT_ID'],
@@ -131,55 +139,52 @@ def create_app():
         client_kwargs={'scope': 'openid email profile'}
     )
 
+    # Client Microsoft
     tenant_id = app.config.get('AZURE_TENANT_ID')
-
-    
     if not tenant_id:
         raise ValueError("La variable d'environnement AZURE_TENANT_ID n'est pas configurée.")
-
-
     oauth.register(
         name='microsoft',
         client_id=app.config['AZURE_CLIENT_ID'],
         client_secret=app.config['AZURE_CLIENT_SECRET'],
         server_metadata_url=f"https://login.microsoftonline.com/{tenant_id}/v2.0/.well-known/openid-configuration",
-        client_kwargs={
-            'scope': 'openid profile email User.Read'
-        }
+        client_kwargs={'scope': 'openid profile email User.Read'}
     )
     
-    # Le serializer est toujours créé ici car il dépend de la config de l'app
-    from itsdangerous import URLSafeTimedSerializer
-    app.serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])   
-    
+    # Client Supabase
     url, key = app.config.get('SUPABASE_URL'), app.config.get('SUPABASE_KEY')
     if url and key:
         app.supabase = create_client(url, key)
-        app.db_disponible = True
-        print("✅ Connexion à Supabase initialisée.")
     else:
         app.supabase = None
-        app.db_disponible = False
-        print("ℹ️ Connexion à Supabase ignorée.")
         
-    app.config['USERS_FILE'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'users.json')
-    app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'pdfs')
-
+    # --- 4. ENREGISTREMENT DES BLUEPRINTS ---
+    # On importe et on enregistre les blueprints À L'INTÉRIEUR de la fonction, à la fin.
+    # Ceci évite les problèmes d'importation circulaire et garantit que l'app est
+    # entièrement configurée avant que les routes ne soient définies.
     with app.app_context():
-        from auth import auth as auth_blueprint
-        app.register_blueprint(auth_blueprint, url_prefix='/auth')
-        
         from main_routes import main as main_blueprint
-        app.register_blueprint(main_blueprint)
-        
+        from auth import auth as auth_blueprint
         from admin import admin as admin_blueprint
+
+        app.register_blueprint(main_blueprint)
+        app.register_blueprint(auth_blueprint, url_prefix='/auth')
         app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
+    # --- 5. RETOUR DE L'INSTANCE DE L'APPLICATION ---
     return app
 
-# On appelle la factory pour créer l'instance de l'application.
+
+# =======================================================
+# ==== POINT D'ENTRÉE POUR VERCEL ET L'EXÉCUTION LOCALE ====
+# =======================================================
+
+# On appelle la fabrique pour créer l'instance de l'application.
 # Cette variable 'app' est maintenant globale et Vercel pourra la trouver.
 app = create_app()
-# --- Point d'entrée pour l'exécution directe ---
+
+# Ce bloc ne s'exécute que lorsque vous lancez "python app.py" localement.
+# Vercel ignorera complètement ce bloc.
 if __name__ == '__main__':
-    app.run(debug=app.config['DEBUG'])
+    # On utilise app.config.get() pour éviter une erreur si DEBUG n'est pas défini
+    app.run(debug=app.config.get('DEBUG', False))
