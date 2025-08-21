@@ -1462,7 +1462,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Charge les requêtes selon le type (ventes ou achats)
         function chargerRequetes(type) {
-            const chemin = `/static/data_demo/${type}_requetes_avancees.json`;
+            const chemin = `${STATIC_URL}data_demo/${type}_requetes_avancees.json`;
 
             fetch(chemin)
                 .then(res => res.json())

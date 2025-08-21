@@ -11,6 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script>
+    // Définition de la variable STATIC_URL pour l'utilisation dans le JavaScript
+        const STATIC_URL = "{{ url_for('static', filename='') }}";
+    </script>
 </head>
 
 <body data-user-id="{{ current_user.id }}">

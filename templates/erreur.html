@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Erreur</title>
+    <script>
+    // Définition de la variable STATIC_URL pour l'utilisation dans le JavaScript
+        const STATIC_URL = "{{ url_for('static', filename='') }}";
+    </script>
 </head>
 <body>
     <h1>Une erreur est survenue</h1>

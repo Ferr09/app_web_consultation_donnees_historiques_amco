@@ -6,6 +6,10 @@
     <title>AMCO – Filtres avancés</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+    // Définition de la variable STATIC_URL pour l'utilisation dans le JavaScript
+        const STATIC_URL = "{{ url_for('static', filename='') }}";
+    </script>
 </head>
 
 <body data-page="filtres-avances" data-requete-id="{{ requete.id }}" data-requete-type="{{ type_transaction }}">

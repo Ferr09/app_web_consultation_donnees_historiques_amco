@@ -14,6 +14,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Bloc pour des CSS spécifiques à une page -->
+     <script>
+    // Définition de la variable STATIC_URL pour l'utilisation dans le JavaScript
+        const STATIC_URL = "{{ url_for('static', filename='') }}";
+    </script>
     {% block head %}{% endblock %}
 </head>
 
