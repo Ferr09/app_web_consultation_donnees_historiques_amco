@@ -123,11 +123,3 @@ def get_serializer(app=None):
     if app is None:
         app = current_app
     return URLSafeTimedSerializer(app.config['SECRET_KEY'])
-
-def send_email(subject, recipients, body, html_body=None):
-    """Envoie un e-mail."""
-    msg = Message(subject, recipients=recipients, body=body, html=html_body)
-    try:
-        mail.send(msg)
-    except Exception as e:
-        current_app.logger.error(f"Erreur lors de l'envoi de l'e-mail : {e}")
