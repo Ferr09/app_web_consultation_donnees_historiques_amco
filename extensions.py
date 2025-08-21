@@ -5,7 +5,6 @@ Cela évite les importations circulaires et garantit que tous les blueprints
 utilisent les mêmes instances d'extensions.
 """
 from flask_login import LoginManager
-from flask_mail import Mail
 from authlib.integrations.flask_client import OAuth
 from itsdangerous import URLSafeTimedSerializer
 

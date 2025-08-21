@@ -4,7 +4,6 @@ import os  # Nécessaire pour lire les variables d'environnement
 import json
 from mailbox import Message
 from flask import current_app
-from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer
 from extensions import mail
 import secrets
