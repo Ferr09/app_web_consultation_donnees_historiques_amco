@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script>
-    // Définition de la variable STATIC_URL pour l'utilisation dans le JavaScript
+        // Définition de la variable STATIC_URL pour l'utilisation dans le JavaScript
         const STATIC_URL = "{{ url_for('static', filename='') }}";
     </script>
 </head>
@@ -56,6 +56,9 @@
                                 height="30">
                         </a>
                         <h1>Résultats de la requête</h1>
+                        <div id="result-count">
+                            <h3>Total de lignes de résultat: </h3>
+                        </div>
                     </div>
 
                     <!-- 2) Barre de téléchargement (identique) -->
@@ -134,6 +137,7 @@
             const pageSize = 15; // Nombre de lignes par page
             let currentPage = 1;
             let totalPages = Math.ceil(allData.length / pageSize) || 1;
+            let totalData = allData.length;
 
             const tableBody = document.getElementById('tableau-corps');
             const pageNumSpan = document.getElementById('page-number');

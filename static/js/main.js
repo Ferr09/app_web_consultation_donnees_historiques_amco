@@ -695,6 +695,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // main.js
 
+        function resultats () {
+            const qteResultats = document.getElementById('result-count');
+            if (!qteResultats) return; // Sécurité
+            qteResultats.innerHTML = "Chargement des données...";
+
+            if (filteredData.length > 0) {
+            qteResultats.innerHTML = `<h3>${filteredData.length} résultats</h3>`;
+            } else {
+            qteResultats.innerHTML = '<h3>Aucun résultat</h3>';
+            }
+            return;
+        }
+
         function renderTable() {
             const enTeteTableau = document.querySelector('#tableau-en-tete');
             const corpsTableau = document.querySelector('#tableau-corps');
@@ -873,11 +886,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // --- ÉTAPE 4: Afficher le résultat final ---
             currentPage = 1; // Toujours réinitialiser à la première page
             updatePagination();
+            resultats();
             renderTable();
         }
 
-        btnPrev.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); updatePagination(); } });
-        btnNext.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderTable(); updatePagination(); } });
+        btnPrev.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); resultats(); updatePagination(); } });
+        btnNext.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderTable(); resultats(); updatePagination(); } });
 
         btnDownload.addEventListener('click', async () => {
             const texteOriginal = btnDownload.textContent;
