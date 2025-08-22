@@ -183,7 +183,7 @@
                 
                 const totalResults = allData.length;
 
-                if (filteredData.length > 0) {
+                if (totalResults > 0) {
                     countElement.innerHTML = `<h3>${totalResults} résultat${totalResults > 1 ? 's' : ''}</h3>`;
                 } else {
                     countElement.innerHTML = '<h3>Aucun résultat</h3>';
