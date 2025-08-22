@@ -110,6 +110,12 @@ def login():
     return render_template('login.html')
 
 
+@auth.route('/login/email', methods=['GET'])
+def login_local():
+    """Affiche la page de connexion dédiée à l'e-mail et au mot de passe."""
+    return render_template('login_local.html')
+
+
 
 @auth.route('/resend-confirmation', methods=['GET', 'POST'])
 def resend_confirmation():
