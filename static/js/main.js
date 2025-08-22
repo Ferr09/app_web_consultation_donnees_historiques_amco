@@ -698,10 +698,11 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateResultCount () {
             const qteResultats = document.getElementById('result-count');
             if (!qteResultats) return; // Sécurité
-            qteResultats.innerHTML = "Chargement des données...";
+            
+            const totalResults = filteredData.length;
 
-            if (filteredData.length > 0) {
-            qteResultats.innerHTML = `<h3>${filteredData.length} résultats</h3>`;
+            if (totalResults > 0) {
+            qteResultats.innerHTML = `<h3>${totalResults} résultat${totalResults > 1 ? 's' : ''}</h3>`;
             } else {
             qteResultats.innerHTML = '<h3>Aucun résultat</h3>';
             }

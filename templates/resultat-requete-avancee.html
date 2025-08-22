@@ -177,12 +177,27 @@
                 btnNext.disabled = currentPage >= totalPages;
             }
 
+            function updateResultCount() {
+                const countElement = document.getElementById('result-count');
+                if (!countElement) return; // Sécurité
+                
+                const totalResults = allData.length;
+
+                if (filteredData.length > 0) {
+                    countElement.innerHTML = `<h3>${totalResults} résultat${totalResults > 1 ? 's' : ''}</h3>`;
+                } else {
+                    countElement.innerHTML = '<h3>Aucun résultat</h3>';
+                }
+                return;
+            }
+
             // ÉTAPE 4: Écouteurs d'événements
             btnPrev.addEventListener('click', () => {
                 if (currentPage > 1) {
                     currentPage--;
                     renderTable();
                     updatePagination();
+                    
                 }
             });
 
@@ -191,6 +206,7 @@
                     currentPage++;
                     renderTable();
                     updatePagination();
+                    
                 }
             });
 
@@ -241,6 +257,7 @@
             // ÉTAPE 5: Rendu initial
             renderTable();
             updatePagination();
+            updateResultCount();
         });
     </script>
 
