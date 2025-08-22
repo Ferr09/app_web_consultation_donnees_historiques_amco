@@ -1,0 +1,27 @@
+{% extends "layout_auth.html" %}
+
+{% block title %}Connexion par E-mail{% endblock %}
+
+{% block form_content %}
+<h1>Connexion</h1>
+<p class="form-subtitle">Accédez avec votre e-mail et mot de passe</p>
+
+<form method="POST" action="{{ url_for('auth.login') }}" class="login-form">
+    <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+    <div class="form-group-extra">
+        <a href="{{ url_for('auth.reset_verify_code') }}" class="forgot-password-link">Mot de passe oublié ?</a>
+    </div>
+</form>
+
+<div class="auth-links" style="margin-top: 20px; text-align: center;">
+    <a href="{{ url_for('auth.login') }}"> &larr; Retour aux autres méthodes de connexion</a>
+</div>
+{% endblock %}
