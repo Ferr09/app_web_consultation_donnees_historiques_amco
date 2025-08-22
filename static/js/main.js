@@ -695,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // main.js
 
-        function resultats () {
+        function updateResultCount () {
             const qteResultats = document.getElementById('result-count');
             if (!qteResultats) return; // Sécurité
             qteResultats.innerHTML = "Chargement des données...";
@@ -886,12 +886,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // --- ÉTAPE 4: Afficher le résultat final ---
             currentPage = 1; // Toujours réinitialiser à la première page
             updatePagination();
-            resultats();
             renderTable();
+            updateResultCount();
         }
 
-        btnPrev.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); resultats(); updatePagination(); } });
-        btnNext.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderTable(); resultats(); updatePagination(); } });
+        btnPrev.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderTable(); updatePagination(); updateResultCount();} });
+        btnNext.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderTable(); updatePagination(); updateResultCount();} });
 
         btnDownload.addEventListener('click', async () => {
             const texteOriginal = btnDownload.textContent;
