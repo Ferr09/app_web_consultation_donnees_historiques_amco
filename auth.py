@@ -19,7 +19,7 @@ from utils import (
     update_user_microsoft_id,
     load_guides_data
 )
-from decorators import ip_whitelist_required
+from decorators import check_ip_whitelist
 
 
 # On importe les extensions initialisées dans app.py.
@@ -40,7 +40,7 @@ import requests
 from authlib.jose import jwt, JsonWebKey
 from flask import current_app
 
-auth.before_request(ip_whitelist_required)
+auth.before_request(check_ip_whitelist)
 
 # =======================================================
 # Routes d'Authentification
