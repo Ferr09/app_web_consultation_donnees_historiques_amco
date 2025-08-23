@@ -180,9 +180,21 @@ def favicon():
 def index():
     return redirect(url_for('auth.login')) # Redirige vers la page de connexion du blueprint 'auth'
 
-@main.route("/google8e445c41a5256094.html")  # Nom EXACT fourni par Google
+@main.route("/google8e445c41a5256094.html")  
 def google_verification_html():
     return render_template("google8e445c41a5256094.html")
+
+@main.route('/politique-confidentialite')
+def politique_confidentialite():
+    return render_template('politique_confidentialite.html')
+
+@main.route('/conditions-utilisation')
+def conditions_utilisation():
+    return render_template('conditions_utilisation.html')
+
+@main.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 @main.route('/filtre-requete')
 @login_required
@@ -355,20 +367,6 @@ def api_query():
     except Exception as e:
         print(f"🔥 Erreur API /api/query: {e}")
         return jsonify({"erreur": str(e)}), 503
-
-# @main.route('/api/query', methods=['POST'])
-# @login_required
-# def api_query():
-#     """Point d'accès principal pour les requêtes RPC filtrées."""
-#     try:
-#         charge_utile = request.get_json()
-#         type_transaction = charge_utile.get('type_transaction', 'ventes')
-#         filtres = charge_utile.get('filtres', {})
-#         df_resultats = recuperer_donnees_rpc(type_transaction, filtres)
-#         return Response(df_resultats.to_json(orient="records", date_format="iso"), mimetype='application/json')
-#     except Exception as e:
-#         print(f"🔥 Erreur API /api/query: {e}")
-#         return jsonify({"erreur": str(e)}), 503
 
 
 @main.route('/api/<type_transaction>/download', methods=['POST'])
