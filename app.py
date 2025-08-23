@@ -125,6 +125,7 @@ def create_app():
     app.config['SERVER_NAME'] = os.getenv('FLASK_SERVER_NAME', 'localhost:5000')
     app.config['SETUP_CODE'] = os.getenv('SETUP_CODE')
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
+    app.config['ALLOWED_IPS'] = os.getenv('ALLOWED_IPS')  # Liste d'IPs autorisées pour l'admin
     
     # --- 2. INITIALISATION DES EXTENSIONS ---
     # Initialise toutes les extensions avec l'instance de l'application.

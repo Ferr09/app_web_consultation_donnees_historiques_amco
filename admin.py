@@ -15,9 +15,12 @@ from utils import (
     generate_recovery_code,
     load_guides_data
 )
+from decorators import ip_whitelist_required
 
 # On crée le Blueprint pour les routes d'administration
 admin = Blueprint('admin', __name__)
+
+admin.before_request(ip_whitelist_required)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER = os.path.join(basedir, 'static', 'pdfs')

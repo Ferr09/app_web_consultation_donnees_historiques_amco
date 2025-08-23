@@ -18,13 +18,14 @@ from utils import (
     generate_recovery_code,
     load_guides_data
 )
+from decorators import ip_whitelist_required
 
 
 
 # On crée le Blueprint pour toutes les routes principales de l'application
 main = Blueprint('main', __name__)
 
-
+main.before_request(ip_whitelist_required)
 # =======================================================
 # Décorateur pour les routes admin (spécifique à ce blueprint)
 # =======================================================
