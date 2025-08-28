@@ -35,7 +35,7 @@
         <h1>{{ current_sub_item.title }}</h1>
         <div class="pdf-viewer-container">
             <iframe 
-                src="{{ url_for('static', filename='pdfs/' + current_sub_item.pdf) }}" 
+                src="{{ pdf_url }}" 
                 class="pdf-viewer-iframe"
                 title="Visualiseur de PDF pour {{ current_sub_item.title }}">
             </iframe>
