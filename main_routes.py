@@ -16,11 +16,12 @@ from utils import (
     delete_user,
     get_protected_admins,
     generate_recovery_code,
-    load_guides_data
+    load_guides_data,
+    supabase
 )
 from decorators import check_ip_whitelist
 
-
+BUCKET_NAME = 'documentation'
 
 # On crée le Blueprint pour toutes les routes principales de l'application
 main = Blueprint('main', __name__)
@@ -281,7 +282,24 @@ def guide_detail(category_slug, sub_item_slug):
     current_sub_item = category_data['sub_items'].get(sub_item_slug)
     if not current_sub_item:
         abort(404)
-    return render_template('guide_detail.html', category_data=category_data, current_sub_item=current_sub_item, category_slug=category_slug, current_sub_item_slug=sub_item_slug)
+    # (a) Obtenir le nom du fichier PDF à partir de guides.json.
+    pdf_filename = current_sub_item['pdf']
+    
+    # (b) Reconstruire le chemin exact du fichier dans le bucket Supabase.
+    path_in_bucket = f"{category_slug}/{pdf_filename}"
+    
+    # (c) Obtenir l'URL publique et permanente du fichier depuis Supabase.
+    pdf_public_url = supabase.storage.from_(BUCKET_NAME).get_public_url(path_in_bucket)
+    
+    # (d) Passer cette URL à la template pour qu'elle puisse l'utiliser (par ex. dans un <iframe>).
+    return render_template(
+        'guide_detail.html', 
+        category_data=category_data, 
+        current_sub_item=current_sub_item, 
+        category_slug=category_slug, 
+        current_sub_item_slug=sub_item_slug,
+        pdf_url=pdf_public_url  # La variable contenant le lien vers le PDF
+    )
 
 @main.route('/profil')
 @login_required

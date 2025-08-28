@@ -13,7 +13,8 @@ from utils import (
     delete_user,
     get_protected_admins,
     generate_recovery_code,
-    load_guides_data
+    load_guides_data,
+    supabase
 )
 from decorators import check_ip_whitelist
 
@@ -47,6 +48,10 @@ def admin_required(f):
 # Routes du Panel d'Administration
 # =======================================================
 
+
+# Le nom du bucket que vous avez créé sur Supabase.
+BUCKET_NAME = 'documentation' 
+
 @admin.route('/')
 @admin_required
 def panel_admin():
@@ -66,7 +71,10 @@ def mettre_a_jour_doc():
 @admin.route('/maj-doc/update', methods=['POST'])
 @admin_required
 def update_documentation_pdf():
-    # URL de redirection en cas de succès ou d'échec, pour éviter la répétition.
+    """
+    Traite la soumission du formulaire pour mettre à jour un fichier PDF.
+    Le fichier est téléversé sur Supabase Storage en écrasant l'ancienne version.
+    """
     redirect_url = url_for('admin.mettre_a_jour_doc')
 
     try:
@@ -81,48 +89,49 @@ def update_documentation_pdf():
             return redirect(redirect_url)
 
         # --- Étape 2 : Valider le type de fichier ---
-        # S'assurer que le nom du fichier se termine bien par '.pdf' (insensible à la casse).
         if not file.filename.lower().endswith('.pdf'):
             flash("Fichier invalide. Seuls les PDF sont autorisés.", "error")
             return redirect(redirect_url)
 
-        # --- Étape 3 : Valider les données par rapport au fichier de configuration des guides ---
-        # Cette fonction pourrait lever une exception si le fichier n'est pas trouvé.
+        # --- Étape 3 : Valider les données par rapport au fichier de configuration (guides.json) ---
         guides_data = load_guides_data() 
         if category_slug not in guides_data or sub_item_slug not in guides_data[category_slug]['sub_items']:
             flash("Catégorie ou sous-item de guide invalide.", "error")
             return redirect(redirect_url)
 
-        # --- Étape 4 : Logique de sauvegarde du fichier (le cœur de la solution) ---
+        # --- Étape 4 : Logique de sauvegarde sur Supabase ---
 
-        # (a) S'assurer que le dossier de destination existe. S'il n'existe pas, le créer.
-        # 'exist_ok=True' évite une erreur si le dossier existe déjà.
-        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-        # (b) Obtenir le nom de fichier sécurisé depuis guides.json et construire le chemin complet.
+        # (a) Obtenir le nom de fichier officiel depuis guides.json.
         filename = guides_data[category_slug]['sub_items'][sub_item_slug]['pdf']
-        secure_name = secure_filename(filename)
-        upload_path = os.path.join(UPLOAD_FOLDER, secure_name)
+        
+        # (b) Construire le chemin complet dans le bucket pour une organisation claire.
+        path_in_bucket = f"{category_slug}/{filename}"
 
-        # (c) Sauvegarder le fichier téléversé à l'emplacement spécifié.
-        file.save(upload_path)
+        # (c) Lire le contenu du fichier téléversé en mémoire.
+        file_content = file.read()
+        
+        # (d) Téléverser le fichier sur Supabase Storage.
+        # `upsert: true` est la clé : il remplace le fichier s'il existe déjà.
+        supabase.storage.from_(BUCKET_NAME).upload(
+            path=path_in_bucket,
+            file=file_content,
+            file_options={"content-type": "application/pdf", "upsert": "true"}
+        )
 
-        # --- Étape 5 : Afficher un message de succès à l'utilisateur ---
+        # --- Étape 5 : Afficher un message de succès ---
         title = guides_data[category_slug]['sub_items'][sub_item_slug]['title']
         flash(f'Le document pour "{title}" a été mis à jour avec succès.', "success")
 
     except FileNotFoundError:
-        # Gérer spécifiquement le cas où 'data/guides.json' est introuvable.
         flash("Erreur critique : le fichier de configuration des guides (guides.json) est introuvable.", "error")
         current_app.logger.error("Le fichier 'data/guides.json' n'a pas été trouvé.")
         
     except Exception as e:
-        # Capturer toute autre erreur inattendue (permissions d'écriture, disque plein, etc.).
+        # Capture toute autre erreur, y compris les erreurs de connexion à Supabase.
         flash(f"Une erreur inattendue est survenue lors de la sauvegarde : {e}", "error")
-        # Enregistrer l'erreur complète dans les logs du serveur pour le débogage.
         current_app.logger.error(f"Erreur imprévue dans update_documentation_pdf : {e}", exc_info=True)
 
-    # Dans tous les cas (succès ou erreur gérée), rediriger l'utilisateur.
+    # Dans tous les cas (succès ou erreur), rediriger l'utilisateur.
     return redirect(redirect_url)
 
 
