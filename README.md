@@ -1,10 +1,7 @@
 # Application de Consultation de Données Historiques AMCO
 
 > Une application web sécurisée développée avec Flask pour la consultation de données historiques, utilisant Supabase pour le backend. Elle intègre une authentification avancée via OAuth2 (Google & Microsoft) et un panel d'administration complet.
-
-![Aperçu de l'application](lien_vers_votre_screenshot.png)
-*(Conseil : Faites une capture d'écran de votre page de connexion ou de votre tableau de bord et remplacez ce texte par le lien de l'image pour un rendu plus professionnel.)*
-
+> 
 ## À propos du projet
 
 Ce projet est une application web conçue pour offrir une interface sécurisée et intuitive pour la consultation de données historiques de ventes et d'achats. Elle s'appuie sur **Supabase** comme backend de base de données (PostgreSQL), ce qui garantit performance et scalabilité.
